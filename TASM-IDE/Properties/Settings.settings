@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TASM_IDE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ExecutableFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">tasmx.exe</Value>
+    </Setting>
+    <Setting Name="ExecutableTableParameter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-65</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
