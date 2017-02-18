@@ -8,5 +8,8 @@
     <Setting Name="ExecutableTableParameter" Type="System.String" Scope="User">
       <Value Profile="(Default)">-65</Value>
     </Setting>
+    <Setting Name="DefaultEditor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Program Files (x86)\Notepad++\notepad++.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

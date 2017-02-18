@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TASM_IDE
 {
-    public enum ObjectFileFormat
+    public enum ObjectFileFormat : int
     {
         IntelHex,
         MOSFormat,
@@ -15,10 +15,23 @@ namespace TASM_IDE
         IntelHexWord,
     }
 
-    public enum CompileOutputType
+    public enum CompileOutputType : int
     {
         Information,
         Warning,
         Error
+    }
+
+    public enum MainTab : int
+    {
+        Files,
+        Options,
+        Output
+    }
+
+    public enum OutputTab : int
+    {
+        Formatted,
+        Raw
     }
 }

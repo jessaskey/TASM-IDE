@@ -10,7 +10,12 @@ namespace TASM_IDE.Containers
     {
         public CompileOutputType OutputType { get; set; }
         public string Description { get; set; }
-        public string Filename { get; set; }
+        public string FileName { get; set; }
         public int LineNumber { get; set; }
+
+        public int CompileOutputTypeAsInt
+        {
+            get { return (int)OutputType; }
+        }
     }
 }

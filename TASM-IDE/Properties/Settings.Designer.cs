@@ -46,5 +46,17 @@ namespace TASM_IDE.Properties {
                 this["ExecutableTableParameter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\Program Files (x86)\\Notepad++\\notepad++.exe")]
+        public string DefaultEditor {
+            get {
+                return ((string)(this["DefaultEditor"]));
+            }
+            set {
+                this["DefaultEditor"] = value;
+            }
+        }
     }
 }

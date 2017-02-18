@@ -9,6 +9,7 @@ namespace TASM_IDE.Containers
     public class ProjectFile
     {
         public string Filename { get; set; }
+        public string Args { get; set; }
 
         public ProjectFile()
         {
