@@ -182,6 +182,8 @@ namespace TASM_IDE
             checkBoxExpEnable.Checked = true;
             checkBoxLstEnable.Checked = true;
             checkBoxSymEnable.Checked = true;
+            checkBoxExpandSource.Checked = false;
+            checkBoxIgnoreCase.Checked = false;
         }
 
         private void comboBoxSymNaming_SelectedIndexChanged(object sender, EventArgs e)
@@ -260,6 +262,8 @@ namespace TASM_IDE
 
             project.ObjectFileFormat = (ObjectFileFormat)comboBoxObjFormat.SelectedIndex;
             project.TimeAssembly = checkBoxTimer.Checked;
+            project.ExpandSourceInListing = checkBoxExpandSource.Checked;
+            project.IgnoreCaseInLabels = checkBoxIgnoreCase.Checked;
             project.PreBuildCommand = textBoxPreBuildCommand.Text;
             project.PostBuildCommand = textBoxPostBuildCommand.Text;
             project.RunCommand = textBoxRunCommand.Text;
@@ -325,6 +329,8 @@ namespace TASM_IDE
             textBoxPostBuildCommand.Text = project.PostBuildCommand;
             textBoxRunCommand.Text = project.RunCommand;
             checkBoxTimer.Checked = project.TimeAssembly;
+            checkBoxExpandSource.Checked = project.ExpandSourceInListing;
+            checkBoxIgnoreCase.Checked = project.IgnoreCaseInLabels;
 
             checkBoxExpEnable.Checked = project.ExportFileEnabled;
             checkBoxLstEnable.Checked = project.ListingFileEnabled;
@@ -370,6 +376,8 @@ namespace TASM_IDE
             //Pre-Build Command
             if (!String.IsNullOrEmpty(textBoxPreBuildCommand.Text))
             {
+                toolStripStatusLabel.Text = "Executing Pre-Build...";
+                Application.DoEvents();
                 string preBuildCommand = Path.Combine(currentDirectory, textBoxPreBuildCommand.Text);
                 if (File.Exists(preBuildCommand))
                 {
@@ -387,6 +395,9 @@ namespace TASM_IDE
 
             foreach (ProjectFile file in project.Files)
             {
+                toolStripStatusLabel.Text = "Building " + file.Filename + "...";
+                Application.DoEvents();
+
                 string arguments = BuildCommand(file);
 
                 textBoxCompileOutputRaw.Text += ("Running: " + executable + " " + arguments + "\r\n");
@@ -447,6 +458,8 @@ namespace TASM_IDE
             //Post-Build Command
             if (!String.IsNullOrEmpty(textBoxPostBuildCommand.Text))
             {
+                toolStripStatusLabel.Text = "Executing Post-Build...";
+                Application.DoEvents();
                 string postBuildCommand = Path.Combine(currentDirectory, textBoxPostBuildCommand.Text);
                 if (File.Exists(postBuildCommand))
                 {
@@ -528,6 +541,30 @@ namespace TASM_IDE
             sb.Append("-f");
             sb.Append(((short)numericUpDownObjFill.Value).ToString("X2"));
             sb.Append(" ");
+
+            //disable the listing file - quiet mode
+            if (!checkBoxLstEnable.Checked)
+            {
+                sb.Append("-q ");
+            }
+
+            //enable the symbol file
+            if (checkBoxSymEnable.Checked)
+            {
+                sb.Append("-s ");
+            }
+
+            //Expand source flag
+            if (checkBoxExpandSource.Checked)
+            {
+                sb.Append("-e ");
+            }
+
+            //Ignore Case flag
+            if (checkBoxIgnoreCase.Checked)
+            {
+                sb.Append("-i ");
+            }
 
             if (!String.IsNullOrEmpty(file.Args))
             {

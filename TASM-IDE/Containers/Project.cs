@@ -25,5 +25,8 @@ namespace TASM_IDE.Containers
         public string PostBuildCommand { get; set; }
         public string RunCommand { get; set; }
         public bool TimeAssembly { get; set; }
+        public bool ExpandSourceInListing { get; set; }
+        public bool IgnoreCaseInLabels { get; set; }
+
     }
 }

@@ -108,6 +108,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.checkBoxExpandSource = new System.Windows.Forms.CheckBox();
+            this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -239,6 +241,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBoxIgnoreCase);
+            this.tabPage2.Controls.Add(this.checkBoxExpandSource);
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.checkBoxTimer);
@@ -261,16 +265,16 @@
             this.groupBox5.Controls.Add(this.textBoxPreBuildCommand);
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.textBoxRunCommand);
-            this.groupBox5.Location = new System.Drawing.Point(289, 209);
+            this.groupBox5.Location = new System.Drawing.Point(289, 198);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(275, 114);
+            this.groupBox5.Size = new System.Drawing.Size(275, 109);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other Processing:";
             // 
             // textBoxPostBuildCommand
             // 
-            this.textBoxPostBuildCommand.Location = new System.Drawing.Point(75, 53);
+            this.textBoxPostBuildCommand.Location = new System.Drawing.Point(75, 51);
             this.textBoxPostBuildCommand.Name = "textBoxPostBuildCommand";
             this.textBoxPostBuildCommand.Size = new System.Drawing.Size(194, 20);
             this.textBoxPostBuildCommand.TabIndex = 5;
@@ -278,7 +282,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(15, 87);
+            this.label17.Location = new System.Drawing.Point(15, 81);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(30, 13);
             this.label17.TabIndex = 4;
@@ -287,7 +291,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(12, 56);
+            this.label16.Location = new System.Drawing.Point(12, 54);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(57, 13);
             this.label16.TabIndex = 3;
@@ -312,7 +316,7 @@
             // 
             // textBoxRunCommand
             // 
-            this.textBoxRunCommand.Location = new System.Drawing.Point(75, 84);
+            this.textBoxRunCommand.Location = new System.Drawing.Point(75, 78);
             this.textBoxRunCommand.Name = "textBoxRunCommand";
             this.textBoxRunCommand.Size = new System.Drawing.Size(194, 20);
             this.textBoxRunCommand.TabIndex = 0;
@@ -404,7 +408,7 @@
             // checkBoxTimer
             // 
             this.checkBoxTimer.AutoSize = true;
-            this.checkBoxTimer.Location = new System.Drawing.Point(335, 338);
+            this.checkBoxTimer.Location = new System.Drawing.Point(304, 313);
             this.checkBoxTimer.Name = "checkBoxTimer";
             this.checkBoxTimer.Size = new System.Drawing.Size(123, 17);
             this.checkBoxTimer.TabIndex = 0;
@@ -939,6 +943,26 @@
             this.olvColumn2.Text = "Custom Arguments";
             this.olvColumn2.Width = 159;
             // 
+            // checkBoxExpandSource
+            // 
+            this.checkBoxExpandSource.AutoSize = true;
+            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 331);
+            this.checkBoxExpandSource.Name = "checkBoxExpandSource";
+            this.checkBoxExpandSource.Size = new System.Drawing.Size(176, 17);
+            this.checkBoxExpandSource.TabIndex = 11;
+            this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
+            this.checkBoxExpandSource.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIgnoreCase
+            // 
+            this.checkBoxIgnoreCase.AutoSize = true;
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 350);
+            this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
+            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(132, 17);
+            this.checkBoxIgnoreCase.TabIndex = 12;
+            this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
+            this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1071,6 +1095,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonMoveUp;
         private System.Windows.Forms.ToolStripButton toolStripButtonMoveDown;
         private BrightIdeasSoftware.OLVColumn olvColumn2;
+        private System.Windows.Forms.CheckBox checkBoxExpandSource;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreCase;
     }
 }
 
