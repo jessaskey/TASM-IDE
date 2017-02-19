@@ -456,7 +456,8 @@ namespace TASM_IDE
                 if (File.Exists(preBuildCommand))
                 {
                     textBoxCompileOutputRaw.Text += "Executing Pre-Build Command: " + preBuildCommand + "\r\n";
-                    string preBuildOutput = Execute(preBuildCommand, "", currentDirectory, true);
+                    string preBuildOutput = Execute(Path.Combine(currentDirectory, preBuildCommand), "", currentDirectory, true);
+                    textBoxCompileOutputRaw.Text += preBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                 }
                 else
                 {
@@ -476,7 +477,7 @@ namespace TASM_IDE
 
                 textBoxCompileOutputRaw.Text += ("Running: " + executable + " " + arguments + "\r\n");
 
-                string fileOutput = Execute(executable, arguments, currentDirectory, true);
+                string fileOutput = Execute(Path.Combine(currentDirectory, executable), arguments, currentDirectory, true);
                 string[] outputLines = fileOutput.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (string line in outputLines)
@@ -538,7 +539,8 @@ namespace TASM_IDE
                 if (File.Exists(postBuildCommand))
                 {
                     textBoxCompileOutputRaw.Text += "Executing Post-Build Command: " + postBuildCommand + "\r\n";
-                    string postBuildOutput = Execute(postBuildCommand, "", currentDirectory, true);
+                    string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", currentDirectory, true);
+                    textBoxCompileOutputRaw.Text += postBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                 }
                 else
                 {
@@ -578,9 +580,13 @@ namespace TASM_IDE
             // Redirect the output stream of the child process.
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.FileName = Path.Combine(workingDirectory, executable);
+            p.StartInfo.FileName = executable;
             p.StartInfo.Arguments = arguments;
-            p.StartInfo.WorkingDirectory = workingDirectory;
+            if (!String.IsNullOrEmpty(workingDirectory))
+            {
+                p.StartInfo.WorkingDirectory = workingDirectory;
+            }
+            p.StartInfo.RedirectStandardError = true;
             if (hide)
             {
                 p.StartInfo.CreateNoWindow = true;
@@ -856,7 +862,9 @@ namespace TASM_IDE
                 {
                     if (_currentProject != null && !String.IsNullOrEmpty(_currentProject.RunCommand))
                     {
-                        Execute(_currentProject.RunCommand, "", Path.GetDirectoryName(_currentProjectFilename), false);
+                        string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
+                        string runCommandOutput = Execute(Path.Combine(currentDirectory,_currentProject.RunCommand), "", currentDirectory, false);
+                        textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n","\r\n") + "\r\n";
                     }
                 }
             }
