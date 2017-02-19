@@ -55,6 +55,23 @@ namespace TASM_IDE
                         _currentProject.Files.Add(new ProjectFile(relativePath));
                     }
                     objectListViewFiles.SetObjects(_currentProject.Files);
+                    _currentProject.IsDirty = true;
+                }
+            }
+        }
+
+        private void toolStripButtonRemoveProjectFile_Click(object sender, EventArgs e)
+        {
+            if (_currentProject != null && File.Exists(_currentProjectFilename))
+            {
+                if (objectListViewFiles.SelectedItem != null)
+                {
+                    int currentIndex = objectListViewFiles.SelectedIndex;
+
+                    ProjectFile p = objectListViewFiles.SelectedItem.RowObject as ProjectFile;
+                    _currentProject.Files.Remove(p);
+                    objectListViewFiles.SetObjects(_currentProject.Files);
+                    _currentProject.IsDirty = true;
                 }
             }
         }
@@ -81,8 +98,33 @@ namespace TASM_IDE
 
         private void toolStripButtonSave_Click(object sender, EventArgs e)
         {
+            SaveProject();
+        }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveProject();
+        }
 
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sd = new SaveFileDialog();
+            sd.Filter = "TASM Project File | *.tasmp";
+
+            DialogResult dr = sd.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                ApplySettingsToProject(_currentProject);
+                SaveProject(sd.FileName, _currentProject);
+                _currentProject.IsDirty = false;
+                _currentProjectFilename = sd.FileName;
+                LoadProject(_currentProjectFilename);
+            }
+
+        }
+
+        private void SaveProject()
+        {
             if (_currentProject == null || String.IsNullOrEmpty(_currentProjectFilename))
             {
                 SaveFileDialog sd = new SaveFileDialog();
@@ -104,6 +146,7 @@ namespace TASM_IDE
                     writer.Serialize(file, _currentProject);
                     file.Close();
 
+                    _currentProject.IsDirty = false;
                     LoadProject(_currentProjectFilename);
                 }
             }
@@ -111,6 +154,7 @@ namespace TASM_IDE
             {
                 ApplySettingsToProject(_currentProject);
                 SaveProject(_currentProjectFilename, _currentProject);
+                _currentProject.IsDirty = false;
                 LoadProject(_currentProjectFilename);
             }
         }
@@ -140,6 +184,17 @@ namespace TASM_IDE
         }
 
         private void toolStripButtonOpen_Click(object sender, EventArgs e)
+        {
+            OpenProject();
+        }
+
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenProject();
+        }
+
+        private void OpenProject()
         {
             OpenFileDialog od = new OpenFileDialog();
             od.Filter = "TASM Project File | *.tasmp";
@@ -190,7 +245,7 @@ namespace TASM_IDE
         {
             if (comboBoxSymNaming.SelectedIndex == 0)
             {
-                textBoxSymManualFilename.BackColor = Color.Gray;
+                textBoxSymManualFilename.BackColor = Color.LightGray;
                 textBoxSymManualFilename.Enabled = false;
             }
             else
@@ -198,13 +253,18 @@ namespace TASM_IDE
                 textBoxSymManualFilename.BackColor = Color.White;
                 textBoxSymManualFilename.Enabled = true;
             }
+
+            if (_currentProject != null)
+            {
+                _currentProject.IsDirty = true;
+            }
         }
 
         private void comboBoxExpNaming_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxExpNaming.SelectedIndex == 0)
             {
-                textBoxExpManualFilename.BackColor = Color.Gray;
+                textBoxExpManualFilename.BackColor = Color.LightGray;
                 textBoxExpManualFilename.Enabled = false;
             }
             else
@@ -212,13 +272,18 @@ namespace TASM_IDE
                 textBoxExpManualFilename.BackColor = Color.White;
                 textBoxExpManualFilename.Enabled = true;
             }
+
+            if (_currentProject != null)
+            {
+                _currentProject.IsDirty = true;
+            }
         }
 
         private void comboBoxLstNaming_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxLstNaming.SelectedIndex == 0)
             {
-                textBoxLstManualFilename.BackColor = Color.Gray;
+                textBoxLstManualFilename.BackColor = Color.LightGray;
                 textBoxLstManualFilename.Enabled = false;
             }
             else
@@ -226,19 +291,29 @@ namespace TASM_IDE
                 textBoxLstManualFilename.BackColor = Color.White;
                 textBoxLstManualFilename.Enabled = true;
             }
+
+            if (_currentProject != null)
+            {
+                _currentProject.IsDirty = true;
+            }
         }
 
         private void comboBoxObjNaming_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxObjNaming.SelectedIndex == 0)
             {
-                textBoxObjManualFilename.BackColor = Color.Gray;
+                textBoxObjManualFilename.BackColor = Color.LightGray;
                 textBoxObjManualFilename.Enabled = false;
             }
             else
             {
                 textBoxObjManualFilename.BackColor = Color.White;
                 textBoxObjManualFilename.Enabled = true;
+            }
+
+            if (_currentProject != null)
+            {
+                _currentProject.IsDirty = true;
             }
         }
 
@@ -276,7 +351,6 @@ namespace TASM_IDE
 
         public void LoadSettingsFromProject(Project project)
         {
-          
             objectListViewFiles.SetObjects(project.Files);
 
             if (project.ExportFileOptions.AutoNameFile)
@@ -698,9 +772,13 @@ namespace TASM_IDE
 
         private void textBoxPreBuildCommand_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.Shift && e.KeyCode == Keys.B)
+            if (e.KeyCode == Keys.F6)
             {
                 BuildCurrentProject();
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                RunCurrentProject();
             }
         }
 
@@ -765,15 +843,92 @@ namespace TASM_IDE
 
         private void toolStripButtonRun_Click(object sender, EventArgs e)
         {
-            BuildCurrentProject();
+            RunCurrentProject();
+        }
 
-            if (_compilerOutputItems.Where(i => i.OutputType == CompileOutputType.Error).Count() == 0)
+        private void RunCurrentProject()
+        {
+            if (_currentProject != null)
             {
-                if (_currentProject != null && !String.IsNullOrEmpty(_currentProject.RunCommand))
+                BuildCurrentProject();
+
+                if (_compilerOutputItems.Where(i => i.OutputType == CompileOutputType.Error).Count() == 0)
                 {
-                    Execute(_currentProject.RunCommand, "", Path.GetDirectoryName(_currentProjectFilename), false);
+                    if (_currentProject != null && !String.IsNullOrEmpty(_currentProject.RunCommand))
+                    {
+                        Execute(_currentProject.RunCommand, "", Path.GetDirectoryName(_currentProjectFilename), false);
+                    }
                 }
             }
         }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateNewProject();
+        }
+
+        private void toolStripButtonNew_Click(object sender, EventArgs e)
+        {
+            CreateNewProject();
+        }
+
+
+        private void CreateNewProject()
+        {
+            if (_currentProject != null)
+            {
+                if (_currentProject.IsDirty)
+                {
+                    //ask about saving
+                    DialogResult dr = MessageBox.Show("Do you want to save this project before closing?", "Save Project", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (dr == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        if (File.Exists(_currentProjectFilename))
+                        {
+                            SaveProject(_currentProjectFilename, _currentProject);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Project file could not be found. Close aborted.", "Project Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            ResetSettingsToDefault();
+
+        }
+
+
+        private void CompilationOptions_OnChanged(object sender, EventArgs e)
+        {
+            if (_currentProject != null)
+            {
+                _currentProject.IsDirty = true;
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("TASM-IDE\r\nJess M. Askey\r\njess@askey.org", "About TASM-IDE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BuildCurrentProject();
+        }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RunCurrentProject();
+        }
+
+
+
+
     }
 }

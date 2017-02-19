@@ -94,8 +94,6 @@
             this.olvColumnLine = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageListCompileOutputs = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPageCompileOutputRaw = new System.Windows.Forms.TabPage();
             this.textBoxCompileOutputRaw = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -110,6 +108,21 @@
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.checkBoxExpandSource = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.recentProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -125,10 +138,10 @@
             this.tabControlCompileOutput.SuspendLayout();
             this.tabPageCompileOutputFormatted.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewCompileFormatted)).BeginInit();
-            this.toolStrip3.SuspendLayout();
             this.tabPageCompileOutputRaw.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -137,10 +150,10 @@
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 25);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 49);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(583, 422);
+            this.tabControlMain.Size = new System.Drawing.Size(583, 421);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPage1
@@ -150,7 +163,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(575, 396);
+            this.tabPage1.Size = new System.Drawing.Size(575, 372);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -169,7 +182,7 @@
             this.objectListViewFiles.Location = new System.Drawing.Point(3, 28);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
-            this.objectListViewFiles.Size = new System.Drawing.Size(569, 365);
+            this.objectListViewFiles.Size = new System.Drawing.Size(569, 341);
             this.objectListViewFiles.TabIndex = 1;
             this.objectListViewFiles.UseCompatibleStateImageBehavior = false;
             this.objectListViewFiles.View = System.Windows.Forms.View.Details;
@@ -213,6 +226,7 @@
             this.toolStripButtonRemoveProjectFile.Name = "toolStripButtonRemoveProjectFile";
             this.toolStripButtonRemoveProjectFile.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonRemoveProjectFile.Text = "Remove Selected File";
+            this.toolStripButtonRemoveProjectFile.Click += new System.EventHandler(this.toolStripButtonRemoveProjectFile_Click);
             // 
             // toolStripSeparator2
             // 
@@ -252,7 +266,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(575, 396);
+            this.tabPage2.Size = new System.Drawing.Size(575, 395);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Compile Options";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -278,6 +292,7 @@
             this.textBoxPostBuildCommand.Name = "textBoxPostBuildCommand";
             this.textBoxPostBuildCommand.Size = new System.Drawing.Size(194, 20);
             this.textBoxPostBuildCommand.TabIndex = 5;
+            this.textBoxPostBuildCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label17
             // 
@@ -303,6 +318,7 @@
             this.textBoxPreBuildCommand.Name = "textBoxPreBuildCommand";
             this.textBoxPreBuildCommand.Size = new System.Drawing.Size(194, 20);
             this.textBoxPreBuildCommand.TabIndex = 2;
+            this.textBoxPreBuildCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             this.textBoxPreBuildCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPreBuildCommand_KeyDown);
             // 
             // label15
@@ -320,6 +336,7 @@
             this.textBoxRunCommand.Name = "textBoxRunCommand";
             this.textBoxRunCommand.Size = new System.Drawing.Size(194, 20);
             this.textBoxRunCommand.TabIndex = 0;
+            this.textBoxRunCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // groupBox2
             // 
@@ -348,6 +365,7 @@
             this.checkBoxLstEnable.TabIndex = 10;
             this.checkBoxLstEnable.Text = "Enable Listing File";
             this.checkBoxLstEnable.UseVisualStyleBackColor = true;
+            this.checkBoxLstEnable.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // textBoxLstManualFilename
             // 
@@ -357,6 +375,7 @@
             this.textBoxLstManualFilename.Name = "textBoxLstManualFilename";
             this.textBoxLstManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxLstManualFilename.TabIndex = 7;
+            this.textBoxLstManualFilename.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label11
             // 
@@ -395,6 +414,7 @@
             this.textBoxLstDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxLstDirectory.TabIndex = 3;
             this.textBoxLstDirectory.Text = "./lst";
+            this.textBoxLstDirectory.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label13
             // 
@@ -414,6 +434,7 @@
             this.checkBoxTimer.TabIndex = 0;
             this.checkBoxTimer.Text = "Time each Assembly";
             this.checkBoxTimer.UseVisualStyleBackColor = true;
+            this.checkBoxTimer.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // groupBox4
             // 
@@ -442,6 +463,7 @@
             this.checkBoxExpEnable.TabIndex = 8;
             this.checkBoxExpEnable.Text = "Enable Export File";
             this.checkBoxExpEnable.UseVisualStyleBackColor = true;
+            this.checkBoxExpEnable.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // textBoxExpManualFilename
             // 
@@ -451,6 +473,7 @@
             this.textBoxExpManualFilename.Name = "textBoxExpManualFilename";
             this.textBoxExpManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxExpManualFilename.TabIndex = 7;
+            this.textBoxExpManualFilename.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label8
             // 
@@ -489,6 +512,7 @@
             this.textBoxExpDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxExpDirectory.TabIndex = 3;
             this.textBoxExpDirectory.Text = "./exp";
+            this.textBoxExpDirectory.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label10
             // 
@@ -526,6 +550,7 @@
             this.checkBoxSymEnable.TabIndex = 9;
             this.checkBoxSymEnable.Text = "Enable Symbol File";
             this.checkBoxSymEnable.UseVisualStyleBackColor = true;
+            this.checkBoxSymEnable.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // textBoxSymManualFilename
             // 
@@ -535,6 +560,7 @@
             this.textBoxSymManualFilename.Name = "textBoxSymManualFilename";
             this.textBoxSymManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxSymManualFilename.TabIndex = 7;
+            this.textBoxSymManualFilename.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label5
             // 
@@ -573,6 +599,7 @@
             this.textBoxSymDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxSymDirectory.TabIndex = 3;
             this.textBoxSymDirectory.Text = "./sym";
+            this.textBoxSymDirectory.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label7
             // 
@@ -614,6 +641,7 @@
             this.numericUpDownObjFill.Name = "numericUpDownObjFill";
             this.numericUpDownObjFill.Size = new System.Drawing.Size(58, 20);
             this.numericUpDownObjFill.TabIndex = 9;
+            this.numericUpDownObjFill.ValueChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label14
             // 
@@ -632,6 +660,7 @@
             this.textBoxObjManualFilename.Name = "textBoxObjManualFilename";
             this.textBoxObjManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxObjManualFilename.TabIndex = 7;
+            this.textBoxObjManualFilename.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label4
             // 
@@ -670,6 +699,7 @@
             this.textBoxObjDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxObjDirectory.TabIndex = 3;
             this.textBoxObjDirectory.Text = "./obj";
+            this.textBoxObjDirectory.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // label2
             // 
@@ -702,13 +732,14 @@
             this.comboBoxObjFormat.Name = "comboBoxObjFormat";
             this.comboBoxObjFormat.Size = new System.Drawing.Size(145, 21);
             this.comboBoxObjFormat.TabIndex = 0;
+            this.comboBoxObjFormat.SelectedIndexChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tabControlCompileOutput);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(575, 396);
+            this.tabPage3.Size = new System.Drawing.Size(575, 395);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Compile Output";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -721,7 +752,7 @@
             this.tabControlCompileOutput.Location = new System.Drawing.Point(0, 0);
             this.tabControlCompileOutput.Name = "tabControlCompileOutput";
             this.tabControlCompileOutput.SelectedIndex = 0;
-            this.tabControlCompileOutput.Size = new System.Drawing.Size(575, 396);
+            this.tabControlCompileOutput.Size = new System.Drawing.Size(575, 395);
             this.tabControlCompileOutput.TabIndex = 0;
             // 
             // tabPageCompileOutputFormatted
@@ -731,7 +762,7 @@
             this.tabPageCompileOutputFormatted.Location = new System.Drawing.Point(4, 22);
             this.tabPageCompileOutputFormatted.Name = "tabPageCompileOutputFormatted";
             this.tabPageCompileOutputFormatted.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCompileOutputFormatted.Size = new System.Drawing.Size(567, 370);
+            this.tabPageCompileOutputFormatted.Size = new System.Drawing.Size(567, 369);
             this.tabPageCompileOutputFormatted.TabIndex = 1;
             this.tabPageCompileOutputFormatted.Text = "Formatted";
             this.tabPageCompileOutputFormatted.UseVisualStyleBackColor = true;
@@ -757,7 +788,7 @@
             this.objectListViewCompileFormatted.MultiSelect = false;
             this.objectListViewCompileFormatted.Name = "objectListViewCompileFormatted";
             this.objectListViewCompileFormatted.ShowGroups = false;
-            this.objectListViewCompileFormatted.Size = new System.Drawing.Size(561, 339);
+            this.objectListViewCompileFormatted.Size = new System.Drawing.Size(561, 338);
             this.objectListViewCompileFormatted.SmallImageList = this.imageListCompileOutputs;
             this.objectListViewCompileFormatted.TabIndex = 1;
             this.objectListViewCompileFormatted.UseCompatibleStateImageBehavior = false;
@@ -799,34 +830,11 @@
             // 
             // toolStrip3
             // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
             this.toolStrip3.Location = new System.Drawing.Point(3, 3);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.Size = new System.Drawing.Size(561, 25);
             this.toolStrip3.TabIndex = 0;
             this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.CheckOnClick = true;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.CheckOnClick = true;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
             // 
             // tabPageCompileOutputRaw
             // 
@@ -852,13 +860,13 @@
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonOpen,
             this.toolStripButtonNew,
+            this.toolStripButtonOpen,
             this.toolStripButtonSave,
             this.toolStripSeparator1,
             this.toolStripButtonBuild,
             this.toolStripButtonRun});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(583, 25);
             this.toolStrip2.TabIndex = 1;
@@ -882,6 +890,7 @@
             this.toolStripButtonNew.Name = "toolStripButtonNew";
             this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonNew.Text = "Create New TASM Project";
+            this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
             // 
             // toolStripButtonSave
             // 
@@ -922,7 +931,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 447);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(583, 22);
             this.statusStrip1.TabIndex = 2;
@@ -952,6 +961,7 @@
             this.checkBoxExpandSource.TabIndex = 11;
             this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
             this.checkBoxExpandSource.UseVisualStyleBackColor = true;
+            this.checkBoxExpandSource.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // checkBoxIgnoreCase
             // 
@@ -962,16 +972,135 @@
             this.checkBoxIgnoreCase.TabIndex = 12;
             this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
             this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
+            this.checkBoxIgnoreCase.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
+            // 
+            // menuStripMain
+            // 
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.projectToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(583, 24);
+            this.menuStripMain.TabIndex = 3;
+            this.menuStripMain.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.recentProjectsToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As..";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            // 
+            // recentProjectsToolStripMenuItem
+            // 
+            this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
+            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.recentProjectsToolStripMenuItem.Text = "Recent Projects..";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // projectToolStripMenuItem
+            // 
+            this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buildToolStripMenuItem,
+            this.runToolStripMenuItem});
+            this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Text = "Project";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // buildToolStripMenuItem
+            // 
+            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.buildToolStripMenuItem.Text = "Build";
+            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 469);
+            this.ClientSize = new System.Drawing.Size(583, 492);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.menuStripMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStripMain;
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -1002,14 +1131,14 @@
             this.tabPageCompileOutputFormatted.ResumeLayout(false);
             this.tabPageCompileOutputFormatted.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewCompileFormatted)).EndInit();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.tabPageCompileOutputRaw.ResumeLayout(false);
             this.tabPageCompileOutputRaw.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1083,8 +1212,6 @@
         private System.Windows.Forms.CheckBox checkBoxExpEnable;
         private System.Windows.Forms.CheckBox checkBoxSymEnable;
         private System.Windows.Forms.ImageList imageListCompileOutputs;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.TextBox textBoxPostBuildCommand;
         private System.Windows.Forms.Label label17;
@@ -1097,6 +1224,21 @@
         private BrightIdeasSoftware.OLVColumn olvColumn2;
         private System.Windows.Forms.CheckBox checkBoxExpandSource;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCase;
+        private System.Windows.Forms.MenuStrip menuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem recentProjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
     }
 }
 
