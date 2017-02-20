@@ -22,9 +22,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://cdn.rawgit.com/jessaskey/TASM-IDE/aa6d0f55/TASM-IDE/publish/</InstallUrl>
+    <InstallUrl>https://rawgit.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/setup.exe/</InstallUrl>
     <PublisherName>TASM-IDE</PublisherName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

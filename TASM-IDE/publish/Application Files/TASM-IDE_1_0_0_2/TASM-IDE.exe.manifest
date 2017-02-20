@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="TASM-IDE.exe" version="1.0.0.2" publicKeyToken="1ecb79813050330b" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="favicon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="TASM-IDE" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="TASM-IDE.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ObjectListView.dll" size="444928">
+      <assemblyIdentity name="ObjectListView" version="2.9.1.1072" publicKeyToken="B1C5BF581481BCD4" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>C5SzgkdhcjQA3ANX59SQCFpczzQV4zIVXFuNbHv7h4g=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TASM-IDE.exe" size="123336">
+      <assemblyIdentity name="TASM-IDE" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>qrwZ+ezPPT0XjPXwFqlGUnPLV6ypoX0//W+51sJjMug=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="favicon.ico" size="32988">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>MzFXQC2Qc1AQCvL1yRuyDR6AEZbdhU1ydbs7Z7H0q4M=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="TASM-IDE.exe.config" size="1354">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>p/+D7KYMdzmphMZfpbgu4SV2+BpfYRsPUOYVm1bfd6Q=</dsig:DigestValue>
+    </hash>
+  </file>
+  <fileAssociation extension=".tasmp" description="TASM Project File" progid="TASMPROG" defaultIcon="favicon.ico" xmlns="urn:schemas-microsoft-com:clickonce.v1" />
+<publisherIdentity name="CN=NEWBELGIUM\jaskey" issuerKeyHash="6ef341a7160b4f49772d79df74ca62138988b1dd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>eKKDQZy/ED9gps7mQq0sHZyww4Ac0W9z9eQvrQxm8NU=</DigestValue></Reference></SignedInfo><SignatureValue>stJHlSLLgWOD//zDInr6UZHo2zsfeX503F6z35gyGWimNl2ZEGEsLGbJkJIa0gIsLPcWmecv24BDbp+Dfm9C9PgpPqAefFLCwDin6ygxW8RNs3kZaBdnKKOAeLLOuwtRWl7Cv8Y2qZs/+MRTXf+4hSMJ+Jq6lemUxz7Q+wihmTk=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>3T12VcbULhP8MY1mz0uNG7Z+wCsQmHwX1e89E8ZdFw4hxjKIXmh/OxNBbjf0J/9enDZGsdLDacWYT91QPGSRHWkcSYkFTJrHLhF2zYxwLX4O/4M4fJG2rTkRYsc4gBhUEWhsA0JDh99oUBYsJ5dM8yOar1lRwsC8URKgrPRQR7E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="d5f0660cad2fe4f5736fd11c80c3b09c1d2cad42e6cea6603f10bf9c4183a278" Description="" Url=""><as:assemblyIdentity name="TASM-IDE.exe" version="1.0.0.2" publicKeyToken="1ecb79813050330b" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=NEWBELGIUM\jaskey</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>aq/7bgZbCuLM3DuirwTfOkVh/bAxitUeqbHQgySyDjU=</DigestValue></Reference></SignedInfo><SignatureValue>IvLUD96rzfiONcwKCnRPBj3L6N4chz+WO8V4QTulIf0eKkZCCQmMiHVcH3nhyBoWTY4NOvBta0kilqQRLe2a9cDTd+jbsYGF2zOZRSSQ2MOLGWGtYbGhnB4tokz0D8fBc96f1A87JQUkvlZx9B4G/M+uRK3L9WnFbT0hpae2Pws=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>3T12VcbULhP8MY1mz0uNG7Z+wCsQmHwX1e89E8ZdFw4hxjKIXmh/OxNBbjf0J/9enDZGsdLDacWYT91QPGSRHWkcSYkFTJrHLhF2zYxwLX4O/4M4fJG2rTkRYsc4gBhUEWhsA0JDh99oUBYsJ5dM8yOar1lRwsC8URKgrPRQR7E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB3TCCAUagAwIBAgIQP6a/2K5Ho6FG2FEIuApZPDANBgkqhkiG9w0BAQsFADAtMSswKQYDVQQDHiIATgBFAFcAQgBFAEwARwBJAFUATQBcAGoAYQBzAGsAZQB5MB4XDTE3MDIyMDE2MzEyNVoXDTE4MDIyMDIyMzEyNVowLTErMCkGA1UEAx4iAE4ARQBXAEIARQBMAEcASQBVAE0AXABqAGEAcwBrAGUAeTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA3T12VcbULhP8MY1mz0uNG7Z+wCsQmHwX1e89E8ZdFw4hxjKIXmh/OxNBbjf0J/9enDZGsdLDacWYT91QPGSRHWkcSYkFTJrHLhF2zYxwLX4O/4M4fJG2rTkRYsc4gBhUEWhsA0JDh99oUBYsJ5dM8yOar1lRwsC8URKgrPRQR7ECAwEAATANBgkqhkiG9w0BAQsFAAOBgQAakDo81qnQnBxz5d2aLKUfRMf4ed+RmexGhRurq1+aInbj+BGtkBU2BtyHViII2AXjRdQvWYJgOmZdN0jkpYDsq//BGPGkVF9PGUg7eq4y1yhymbTfLte5zUch8KBqO8V2Ve95gVBdBMLaC21+xqLCURnTs2omkKlwA/3vyAbvVw==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
