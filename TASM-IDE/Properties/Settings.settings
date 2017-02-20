@@ -11,5 +11,8 @@
     <Setting Name="DefaultEditor" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\Program Files (x86)\Notepad++\notepad++.exe</Value>
     </Setting>
+    <Setting Name="RecentFileList" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

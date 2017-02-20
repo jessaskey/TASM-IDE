@@ -26,10 +26,8 @@ namespace TASM_IDE
         {
             InitializeComponent();
             ResetSettingsToDefault();
-
-            //objectListViewCompileFormatted.
-
             olvCompileItemColumnImage.ImageGetter = CompileItemImageGetter;
+            LoadRecentFiles();
         }
 
         public object CompileItemImageGetter(object rowObject) {
@@ -119,6 +117,7 @@ namespace TASM_IDE
                 _currentProject.IsDirty = false;
                 _currentProjectFilename = sd.FileName;
                 LoadProject(_currentProjectFilename);
+                AddRecentfile(_currentProjectFilename);
             }
 
         }
@@ -180,6 +179,8 @@ namespace TASM_IDE
 
                 this.Text = "TASM-IDE - " + Path.GetFileName(currentProjectFilename);
                 LoadSettingsFromProject(_currentProject);
+                AddRecentfile(currentProjectFilename);
+                _currentProject.IsDirty = false;
             }
         }
 
@@ -746,30 +747,42 @@ namespace TASM_IDE
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            DialogResult dr = SaveCurrentProject();
+            if (dr == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                SaveRecentFiles();
+            }
+
+        }
+
+        private DialogResult SaveCurrentProject()
+        {
+            DialogResult dr = DialogResult.OK;
             if (_currentProject != null)
             {
                 if (_currentProject.IsDirty)
                 {
                     //ask about saving
-                    DialogResult dr = MessageBox.Show("Do you want to save this project before closing?", "Save Project", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    dr = MessageBox.Show("Do you want to save this project before closing?", "Save Project", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (dr == System.Windows.Forms.DialogResult.Yes)
                     {
                         if (File.Exists(_currentProjectFilename))
                         {
                             SaveProject(_currentProjectFilename, _currentProject);
+                            dr = DialogResult.OK;
                         }
                         else
                         {
                             MessageBox.Show("Project file could not be found. Close aborted.", "Project Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            e.Cancel = true;
                         }
-                    }
-                    else if (dr == System.Windows.Forms.DialogResult.Cancel)
-                    {
-                        e.Cancel = true;
                     }
                 }
             }
+            return dr;
         }
 
         private void objectListViewCompileFormatted_DoubleClick(object sender, EventArgs e)
@@ -963,7 +976,95 @@ namespace TASM_IDE
         }
 
 
+        #region RecentItemsMenu
 
+        private void AddRecentfile(string fileName)
+        {
+            //get the recent files already here...take them out
+            RemoveRecentItem(fileName);
+            //put it back, on top tho
+            ToolStripMenuItem newItem = new ToolStripMenuItem();
+            newItem.Text = fileName;
+            recentProjectsToolStripMenuItem.DropDownItems.Insert(0, newItem);
+
+
+        }
+
+
+        private void LoadRecentFiles()
+        {
+            recentProjectsToolStripMenuItem.DropDownItems.Clear();
+
+            string[] files = Properties.Settings.Default.RecentFileList.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string file in files)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem(file);
+                item.Click += recentItem_Click;
+                recentProjectsToolStripMenuItem.DropDownItems.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Saves the current recent files Menu Items into the application settings
+        /// </summary>
+        private void SaveRecentFiles()
+        {
+            Properties.Settings.Default.RecentFileList = String.Join(";", recentProjectsToolStripMenuItem.DropDownItems.Cast<ToolStripMenuItem>().Select(i => i.Text).ToArray());
+            Properties.Settings.Default.Save();
+        }
+
+        private void RemoveRecentItem(string fileName)
+        {
+            for (int i = recentProjectsToolStripMenuItem.DropDownItems.Count - 1; i >= 0; i--)
+            {
+                ToolStripMenuItem item = recentProjectsToolStripMenuItem.DropDownItems[i] as ToolStripMenuItem;
+                if (item != null)
+                {
+                    if (fileName.ToLower() == item.Text.ToLower())
+                    {
+                        recentProjectsToolStripMenuItem.DropDownItems.Remove(item);
+                    }
+                }
+            }
+        }
+
+        private void recentItem_Click(object sender, EventArgs e)
+        {
+            //a recent item was checked here... open it 
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item != null)
+            {
+                if (File.Exists(item.Text))
+                {
+                    switch (Path.GetExtension(item.Text).ToLower())
+                    {
+                        case ".tasmp":
+                            {
+                                DialogResult dr = SaveCurrentProject();
+                                if (dr == DialogResult.Cancel)
+                                {
+                                    return;
+                                }
+                                LoadProject(item.Text);
+                                AddRecentfile(item.Text);
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    DialogResult dr = MessageBox.Show("File no longer exists in the location or cannot be opened. Would you like to remove this from the Recent File list?", "Missing File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        RemoveRecentItem(item.Text);
+                    }
+                }
+            }
+
+        }
+
+
+        #endregion
 
     }
 }

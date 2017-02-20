@@ -34,6 +34,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.objectListViewFiles = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddProjectFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRemoveProjectFile = new System.Windows.Forms.ToolStripButton();
@@ -41,6 +42,8 @@
             this.toolStripButtonMoveUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonMoveDown = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
+            this.checkBoxExpandSource = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBoxPostBuildCommand = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -97,19 +100,17 @@
             this.tabPageCompileOutputRaw = new System.Windows.Forms.TabPage();
             this.textBoxCompileOutputRaw = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonBuild = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRun = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.checkBoxExpandSource = new System.Windows.Forms.CheckBox();
-            this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,12 +118,11 @@
             this.recentProjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -163,7 +163,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(575, 372);
+            this.tabPage1.Size = new System.Drawing.Size(575, 395);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@
             this.objectListViewFiles.Location = new System.Drawing.Point(3, 28);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
-            this.objectListViewFiles.Size = new System.Drawing.Size(569, 341);
+            this.objectListViewFiles.Size = new System.Drawing.Size(569, 364);
             this.objectListViewFiles.TabIndex = 1;
             this.objectListViewFiles.UseCompatibleStateImageBehavior = false;
             this.objectListViewFiles.View = System.Windows.Forms.View.Details;
@@ -193,6 +193,13 @@
             this.olvColumn1.AspectName = "Filename";
             this.olvColumn1.Text = "Filename";
             this.olvColumn1.Width = 164;
+            // 
+            // olvColumn2
+            // 
+            this.olvColumn2.AspectName = "Args";
+            this.olvColumn2.FillsFreeSpace = true;
+            this.olvColumn2.Text = "Custom Arguments";
+            this.olvColumn2.Width = 159;
             // 
             // toolStrip1
             // 
@@ -270,6 +277,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Compile Options";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIgnoreCase
+            // 
+            this.checkBoxIgnoreCase.AutoSize = true;
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 350);
+            this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
+            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(132, 17);
+            this.checkBoxIgnoreCase.TabIndex = 12;
+            this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
+            this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
+            this.checkBoxIgnoreCase.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
+            // 
+            // checkBoxExpandSource
+            // 
+            this.checkBoxExpandSource.AutoSize = true;
+            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 331);
+            this.checkBoxExpandSource.Name = "checkBoxExpandSource";
+            this.checkBoxExpandSource.Size = new System.Drawing.Size(176, 17);
+            this.checkBoxExpandSource.TabIndex = 11;
+            this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
+            this.checkBoxExpandSource.UseVisualStyleBackColor = true;
+            this.checkBoxExpandSource.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // groupBox5
             // 
@@ -842,7 +871,7 @@
             this.tabPageCompileOutputRaw.Location = new System.Drawing.Point(4, 22);
             this.tabPageCompileOutputRaw.Name = "tabPageCompileOutputRaw";
             this.tabPageCompileOutputRaw.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(703, 370);
+            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(567, 369);
             this.tabPageCompileOutputRaw.TabIndex = 0;
             this.tabPageCompileOutputRaw.Text = "Raw";
             this.tabPageCompileOutputRaw.UseVisualStyleBackColor = true;
@@ -854,7 +883,7 @@
             this.textBoxCompileOutputRaw.Multiline = true;
             this.textBoxCompileOutputRaw.Name = "textBoxCompileOutputRaw";
             this.textBoxCompileOutputRaw.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(697, 364);
+            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(561, 363);
             this.textBoxCompileOutputRaw.TabIndex = 0;
             // 
             // toolStrip2
@@ -872,16 +901,6 @@
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButtonOpen
-            // 
-            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
-            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
-            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonOpen.Text = "Open TASM Project";
-            this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
-            // 
             // toolStripButtonNew
             // 
             this.toolStripButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -891,6 +910,16 @@
             this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonNew.Text = "Create New TASM Project";
             this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
+            // 
+            // toolStripButtonOpen
+            // 
+            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
+            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpen.Text = "Open TASM Project";
+            this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
             // 
             // toolStripButtonSave
             // 
@@ -945,35 +974,6 @@
             this.toolStripStatusLabel.Text = "Ready...";
             this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // olvColumn2
-            // 
-            this.olvColumn2.AspectName = "Args";
-            this.olvColumn2.FillsFreeSpace = true;
-            this.olvColumn2.Text = "Custom Arguments";
-            this.olvColumn2.Width = 159;
-            // 
-            // checkBoxExpandSource
-            // 
-            this.checkBoxExpandSource.AutoSize = true;
-            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 331);
-            this.checkBoxExpandSource.Name = "checkBoxExpandSource";
-            this.checkBoxExpandSource.Size = new System.Drawing.Size(176, 17);
-            this.checkBoxExpandSource.TabIndex = 11;
-            this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
-            this.checkBoxExpandSource.UseVisualStyleBackColor = true;
-            this.checkBoxExpandSource.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
-            // 
-            // checkBoxIgnoreCase
-            // 
-            this.checkBoxIgnoreCase.AutoSize = true;
-            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 350);
-            this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
-            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(132, 17);
-            this.checkBoxIgnoreCase.TabIndex = 12;
-            this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
-            this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
-            this.checkBoxIgnoreCase.CheckedChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
-            // 
             // menuStripMain
             // 
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1000,6 +1000,13 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
@@ -1045,13 +1052,6 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
             // projectToolStripMenuItem
             // 
             this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1060,6 +1060,20 @@
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.projectToolStripMenuItem.Text = "Project";
+            // 
+            // buildToolStripMenuItem
+            // 
+            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.buildToolStripMenuItem.Text = "Build";
+            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.runToolStripMenuItem.Text = "Run";
+            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1072,23 +1086,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // buildToolStripMenuItem
-            // 
-            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.buildToolStripMenuItem.Text = "Build";
-            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
-            // 
-            // runToolStripMenuItem
-            // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.runToolStripMenuItem.Text = "Run";
-            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -1100,6 +1100,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.menuStripMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripMain;
             this.MaximizeBox = false;
             this.Name = "FormMain";
