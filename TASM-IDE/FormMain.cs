@@ -616,10 +616,31 @@ namespace TASM_IDE
         private string BuildCommand(ProjectFile file)
         {
             StringBuilder sb = new StringBuilder();
+
             sb.Append(Properties.Settings.Default.ExecutableTableParameter);
             sb.Append(" ");
+
+            //object file output, index based upon the combo
+            if (comboBoxObjFormat.SelectedIndex == 3)
+            {
+                //binary, we will override to use the -b flag here
+                //for some reason the -g3 option is slightly different
+                //and the resulting file is different. I have not
+                //been able to find the reason that the obj file is
+                //different based upon the docmentation, but for
+                //now, I will leave this hack here because it works.
+                sb.Append("-b ");
+            }
+            else
+            {
+                sb.Append("-g");
+                sb.Append(comboBoxObjFormat.SelectedIndex.ToString());
+                sb.Append(" ");
+            }
+
+            //fill values
             sb.Append("-f");
-            sb.Append(((short)numericUpDownObjFill.Value).ToString("X2"));
+            sb.Append(((short)numericUpDownObjFill.Value).ToString("x2"));
             sb.Append(" ");
 
             //disable the listing file - quiet mode
@@ -644,6 +665,12 @@ namespace TASM_IDE
             if (checkBoxIgnoreCase.Checked)
             {
                 sb.Append("-i ");
+            }
+
+            //timing
+            if (checkBoxTimer.Checked)
+            {
+                sb.Append("-y ");
             }
 
             if (!String.IsNullOrEmpty(file.Args))
