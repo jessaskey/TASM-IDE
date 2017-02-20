@@ -18,6 +18,8 @@ namespace TASM_IDE
 {
     public partial class FormMain : Form
     {
+        public string OpenArgs = null;
+
         private string _currentProjectFilename = null;
         private Project _currentProject = null;
         private List<CompileOutputItem> _compilerOutputItems = new List<CompileOutputItem>();
@@ -1066,5 +1068,22 @@ namespace TASM_IDE
 
         #endregion
 
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            //check for passed args
+            if (OpenArgs != null)
+            {
+                //MessageBox.Show(arg, "Open");
+                if (File.Exists(OpenArgs))
+                {
+                    //MessageBox.Show(arg, "Exists");
+                    if (OpenArgs.ToLower().EndsWith(".tasmp"))
+                    {
+                        //MessageBox.Show(arg, "Project");
+                        LoadProject(OpenArgs);
+                    }
+                }           
+            }
+        }
     }
 }
