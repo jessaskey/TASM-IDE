@@ -244,6 +244,7 @@ namespace TASM_IDE
             checkBoxSymEnable.Checked = true;
             checkBoxExpandSource.Checked = false;
             checkBoxIgnoreCase.Checked = false;
+            checkBoxContiguousBlockOutput.Checked = true;
         }
 
         private void comboBoxSymNaming_SelectedIndexChanged(object sender, EventArgs e)
@@ -345,6 +346,7 @@ namespace TASM_IDE
             project.ObjectFileFormat = (ObjectFileFormat)comboBoxObjFormat.SelectedIndex;
             project.TimeAssembly = checkBoxTimer.Checked;
             project.ExpandSourceInListing = checkBoxExpandSource.Checked;
+            project.ContiguousBlockOutput = checkBoxContiguousBlockOutput.Checked;
             project.IgnoreCaseInLabels = checkBoxIgnoreCase.Checked;
             project.PreBuildCommand = textBoxPreBuildCommand.Text;
             project.PostBuildCommand = textBoxPostBuildCommand.Text;
@@ -414,6 +416,7 @@ namespace TASM_IDE
             checkBoxTimer.Checked = project.TimeAssembly;
             checkBoxExpandSource.Checked = project.ExpandSourceInListing;
             checkBoxIgnoreCase.Checked = project.IgnoreCaseInLabels;
+            checkBoxContiguousBlockOutput.Checked = project.ContiguousBlockOutput;
 
             checkBoxExpEnable.Checked = project.ExportFileEnabled;
             checkBoxLstEnable.Checked = project.ListingFileEnabled;
@@ -630,21 +633,14 @@ namespace TASM_IDE
             sb.Append(" ");
 
             //object file output, index based upon the combo
-            if (comboBoxObjFormat.SelectedIndex == 3)
+            sb.Append("-g");
+            sb.Append(comboBoxObjFormat.SelectedIndex.ToString());
+            sb.Append(" ");
+
+            //contiguous block output
+            if (checkBoxContiguousBlockOutput.Checked)
             {
-                //binary, we will override to use the -b flag here
-                //for some reason the -g3 option is slightly different
-                //and the resulting file is different. I have not
-                //been able to find the reason that the obj file is
-                //different based upon the docmentation, but for
-                //now, I will leave this hack here because it works.
-                sb.Append("-b ");
-            }
-            else
-            {
-                sb.Append("-g");
-                sb.Append(comboBoxObjFormat.SelectedIndex.ToString());
-                sb.Append(" ");
+                sb.Append("-c ");
             }
 
             //fill values

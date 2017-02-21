@@ -27,6 +27,7 @@ namespace TASM_IDE.Containers
         public bool TimeAssembly { get; set; }
         public bool ExpandSourceInListing { get; set; }
         public bool IgnoreCaseInLabels { get; set; }
+        public bool ContiguousBlockOutput { get; set; }
         public string Executable { get; set; }
         public string TableParameter { get; set; }
     }

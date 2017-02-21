@@ -127,6 +127,7 @@
             this.textBoxTASMExecutable = new System.Windows.Forms.TextBox();
             this.textBoxCompilerTableParameter = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.checkBoxContiguousBlockOutput = new System.Windows.Forms.CheckBox();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -290,7 +291,7 @@
             // checkBoxIgnoreCase
             // 
             this.checkBoxIgnoreCase.AutoSize = true;
-            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 375);
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 380);
             this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
             this.checkBoxIgnoreCase.Size = new System.Drawing.Size(152, 19);
             this.checkBoxIgnoreCase.TabIndex = 12;
@@ -301,7 +302,7 @@
             // checkBoxExpandSource
             // 
             this.checkBoxExpandSource.AutoSize = true;
-            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 356);
+            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 361);
             this.checkBoxExpandSource.Name = "checkBoxExpandSource";
             this.checkBoxExpandSource.Size = new System.Drawing.Size(203, 19);
             this.checkBoxExpandSource.TabIndex = 11;
@@ -317,7 +318,7 @@
             this.groupBox5.Controls.Add(this.textBoxPreBuildCommand);
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.textBoxRunCommand);
-            this.groupBox5.Location = new System.Drawing.Point(289, 223);
+            this.groupBox5.Location = new System.Drawing.Point(289, 228);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(275, 109);
             this.groupBox5.TabIndex = 10;
@@ -466,7 +467,7 @@
             // checkBoxTimer
             // 
             this.checkBoxTimer.AutoSize = true;
-            this.checkBoxTimer.Location = new System.Drawing.Point(304, 338);
+            this.checkBoxTimer.Location = new System.Drawing.Point(304, 343);
             this.checkBoxTimer.Name = "checkBoxTimer";
             this.checkBoxTimer.Size = new System.Drawing.Size(142, 19);
             this.checkBoxTimer.TabIndex = 0;
@@ -650,6 +651,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxContiguousBlockOutput);
             this.groupBox1.Controls.Add(this.numericUpDownObjFill);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.textBoxObjManualFilename);
@@ -662,7 +664,7 @@
             this.groupBox1.Controls.Add(this.comboBoxObjFormat);
             this.groupBox1.Location = new System.Drawing.Point(289, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(275, 175);
+            this.groupBox1.Size = new System.Drawing.Size(275, 183);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Object File Options:";
@@ -1136,6 +1138,16 @@
             this.label19.TabIndex = 14;
             this.label19.Text = "Table Parameter:";
             // 
+            // checkBoxContiguousBlockOutput
+            // 
+            this.checkBoxContiguousBlockOutput.AutoSize = true;
+            this.checkBoxContiguousBlockOutput.Location = new System.Drawing.Point(18, 158);
+            this.checkBoxContiguousBlockOutput.Name = "checkBoxContiguousBlockOutput";
+            this.checkBoxContiguousBlockOutput.Size = new System.Drawing.Size(163, 19);
+            this.checkBoxContiguousBlockOutput.TabIndex = 15;
+            this.checkBoxContiguousBlockOutput.Text = "Contiguous Block Output";
+            this.checkBoxContiguousBlockOutput.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1291,6 +1303,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBoxTASMExecutable;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox checkBoxContiguousBlockOutput;
     }
 }
 
