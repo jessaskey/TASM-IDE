@@ -231,6 +231,8 @@ namespace TASM_IDE
             textBoxObjManualFilename.Text = "";
             textBoxSymManualFilename.Text = "";
 
+            textBoxTASMExecutable.Text = "tasm.exe";
+            textBoxCompilerTableParameter.Text = "-65";
             textBoxPreBuildCommand.Text = "";
             textBoxPostBuildCommand.Text = "";
             textBoxRunCommand.Text = "";
@@ -338,6 +340,8 @@ namespace TASM_IDE
             project.SymbolFileOptions.ManualFilename = textBoxSymManualFilename.Text;
             project.SymbolFileOptions.OutputDirectory = textBoxSymDirectory.Text;
 
+            project.Executable = textBoxTASMExecutable.Text;
+            project.TableParameter = textBoxCompilerTableParameter.Text;
             project.ObjectFileFormat = (ObjectFileFormat)comboBoxObjFormat.SelectedIndex;
             project.TimeAssembly = checkBoxTimer.Checked;
             project.ExpandSourceInListing = checkBoxExpandSource.Checked;
@@ -402,6 +406,8 @@ namespace TASM_IDE
             textBoxSymManualFilename.Text = project.SymbolFileOptions.ManualFilename;
             textBoxSymDirectory.Text = project.SymbolFileOptions.OutputDirectory;
 
+            textBoxTASMExecutable.Text = project.Executable;
+            textBoxCompilerTableParameter.Text = project.TableParameter;
             textBoxPreBuildCommand.Text = project.PreBuildCommand;
             textBoxPostBuildCommand.Text = project.PostBuildCommand;
             textBoxRunCommand.Text = project.RunCommand;
@@ -437,7 +443,7 @@ namespace TASM_IDE
             toolStripStatusLabel.Text = "Starting Build...";
             Application.DoEvents();
 
-            string executable = Properties.Settings.Default.ExecutableFilename;
+            string executable = project.Executable;
             string currentDirectory = Path.GetDirectoryName(projectFileName);
 
             //make sure any output directories exist
@@ -620,7 +626,7 @@ namespace TASM_IDE
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(Properties.Settings.Default.ExecutableTableParameter);
+            sb.Append(textBoxCompilerTableParameter.Text);
             sb.Append(" ");
 
             //object file output, index based upon the combo

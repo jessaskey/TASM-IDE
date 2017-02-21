@@ -25,30 +25,6 @@ namespace TASM_IDE.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("tasmx.exe")]
-        public string ExecutableFilename {
-            get {
-                return ((string)(this["ExecutableFilename"]));
-            }
-            set {
-                this["ExecutableFilename"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-65")]
-        public string ExecutableTableParameter {
-            get {
-                return ((string)(this["ExecutableTableParameter"]));
-            }
-            set {
-                this["ExecutableTableParameter"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("D:\\Program Files (x86)\\Notepad++\\notepad++.exe")]
         public string DefaultEditor {
             get {

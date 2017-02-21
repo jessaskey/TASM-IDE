@@ -123,6 +123,10 @@
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxTASMExecutable = new System.Windows.Forms.TextBox();
+            this.textBoxCompilerTableParameter = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -150,10 +154,10 @@
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 49);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 55);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(583, 421);
+            this.tabControlMain.Size = new System.Drawing.Size(583, 453);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPage1
@@ -163,7 +167,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(575, 395);
+            this.tabPage1.Size = new System.Drawing.Size(575, 386);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -179,10 +183,10 @@
             this.objectListViewFiles.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListViewFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListViewFiles.FullRowSelect = true;
-            this.objectListViewFiles.Location = new System.Drawing.Point(3, 28);
+            this.objectListViewFiles.Location = new System.Drawing.Point(3, 30);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
-            this.objectListViewFiles.Size = new System.Drawing.Size(569, 364);
+            this.objectListViewFiles.Size = new System.Drawing.Size(569, 353);
             this.objectListViewFiles.TabIndex = 1;
             this.objectListViewFiles.UseCompatibleStateImageBehavior = false;
             this.objectListViewFiles.View = System.Windows.Forms.View.Details;
@@ -203,6 +207,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAddProjectFile,
             this.toolStripButtonRemoveProjectFile,
@@ -211,7 +216,7 @@
             this.toolStripButtonMoveDown});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(569, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(569, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -221,7 +226,7 @@
             this.toolStripButtonAddProjectFile.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddProjectFile.Image")));
             this.toolStripButtonAddProjectFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAddProjectFile.Name = "toolStripButtonAddProjectFile";
-            this.toolStripButtonAddProjectFile.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddProjectFile.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddProjectFile.Text = "Add File";
             this.toolStripButtonAddProjectFile.Click += new System.EventHandler(this.toolStripButtonAddProjectFile_Click);
             // 
@@ -231,14 +236,14 @@
             this.toolStripButtonRemoveProjectFile.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRemoveProjectFile.Image")));
             this.toolStripButtonRemoveProjectFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRemoveProjectFile.Name = "toolStripButtonRemoveProjectFile";
-            this.toolStripButtonRemoveProjectFile.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRemoveProjectFile.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonRemoveProjectFile.Text = "Remove Selected File";
             this.toolStripButtonRemoveProjectFile.Click += new System.EventHandler(this.toolStripButtonRemoveProjectFile_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonMoveUp
             // 
@@ -246,7 +251,7 @@
             this.toolStripButtonMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonMoveUp.Image")));
             this.toolStripButtonMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMoveUp.Name = "toolStripButtonMoveUp";
-            this.toolStripButtonMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonMoveUp.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonMoveUp.Text = "Move Selected File Up";
             this.toolStripButtonMoveUp.Click += new System.EventHandler(this.toolStripButtonMoveUp_Click);
             // 
@@ -256,12 +261,16 @@
             this.toolStripButtonMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonMoveDown.Image")));
             this.toolStripButtonMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMoveDown.Name = "toolStripButtonMoveDown";
-            this.toolStripButtonMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonMoveDown.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonMoveDown.Text = "Move Selected File Down";
             this.toolStripButtonMoveDown.Click += new System.EventHandler(this.toolStripButtonMoveDown_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxCompilerTableParameter);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.textBoxTASMExecutable);
+            this.tabPage2.Controls.Add(this.label18);
             this.tabPage2.Controls.Add(this.checkBoxIgnoreCase);
             this.tabPage2.Controls.Add(this.checkBoxExpandSource);
             this.tabPage2.Controls.Add(this.groupBox5);
@@ -273,7 +282,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(575, 395);
+            this.tabPage2.Size = new System.Drawing.Size(575, 427);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Compile Options";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -281,9 +290,9 @@
             // checkBoxIgnoreCase
             // 
             this.checkBoxIgnoreCase.AutoSize = true;
-            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 350);
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(304, 375);
             this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
-            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(132, 17);
+            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(152, 19);
             this.checkBoxIgnoreCase.TabIndex = 12;
             this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
             this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
@@ -292,9 +301,9 @@
             // checkBoxExpandSource
             // 
             this.checkBoxExpandSource.AutoSize = true;
-            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 331);
+            this.checkBoxExpandSource.Location = new System.Drawing.Point(304, 356);
             this.checkBoxExpandSource.Name = "checkBoxExpandSource";
-            this.checkBoxExpandSource.Size = new System.Drawing.Size(176, 17);
+            this.checkBoxExpandSource.Size = new System.Drawing.Size(203, 19);
             this.checkBoxExpandSource.TabIndex = 11;
             this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
             this.checkBoxExpandSource.UseVisualStyleBackColor = true;
@@ -308,7 +317,7 @@
             this.groupBox5.Controls.Add(this.textBoxPreBuildCommand);
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.textBoxRunCommand);
-            this.groupBox5.Location = new System.Drawing.Point(289, 198);
+            this.groupBox5.Location = new System.Drawing.Point(289, 223);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(275, 109);
             this.groupBox5.TabIndex = 10;
@@ -326,9 +335,9 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(15, 81);
+            this.label17.Location = new System.Drawing.Point(12, 81);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(30, 13);
+            this.label17.Size = new System.Drawing.Size(33, 15);
             this.label17.TabIndex = 4;
             this.label17.Text = "Run:";
             // 
@@ -337,7 +346,7 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(12, 54);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(57, 13);
+            this.label16.Size = new System.Drawing.Size(66, 15);
             this.label16.TabIndex = 3;
             this.label16.Text = "Post-Build:";
             // 
@@ -353,9 +362,9 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 27);
+            this.label15.Location = new System.Drawing.Point(12, 27);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(52, 13);
+            this.label15.Size = new System.Drawing.Size(61, 15);
             this.label15.TabIndex = 1;
             this.label15.Text = "Pre-Build:";
             // 
@@ -376,7 +385,7 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.textBoxLstDirectory);
             this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Location = new System.Drawing.Point(8, 269);
+            this.groupBox2.Location = new System.Drawing.Point(8, 294);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(275, 121);
             this.groupBox2.TabIndex = 9;
@@ -388,9 +397,9 @@
             this.checkBoxLstEnable.AutoSize = true;
             this.checkBoxLstEnable.Checked = true;
             this.checkBoxLstEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLstEnable.Location = new System.Drawing.Point(111, 15);
+            this.checkBoxLstEnable.Location = new System.Drawing.Point(117, 15);
             this.checkBoxLstEnable.Name = "checkBoxLstEnable";
-            this.checkBoxLstEnable.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxLstEnable.Size = new System.Drawing.Size(130, 19);
             this.checkBoxLstEnable.TabIndex = 10;
             this.checkBoxLstEnable.Text = "Enable Listing File";
             this.checkBoxLstEnable.UseVisualStyleBackColor = true;
@@ -400,7 +409,7 @@
             // 
             this.textBoxLstManualFilename.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBoxLstManualFilename.Enabled = false;
-            this.textBoxLstManualFilename.Location = new System.Drawing.Point(111, 92);
+            this.textBoxLstManualFilename.Location = new System.Drawing.Point(117, 92);
             this.textBoxLstManualFilename.Name = "textBoxLstManualFilename";
             this.textBoxLstManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxLstManualFilename.TabIndex = 7;
@@ -409,9 +418,9 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 95);
+            this.label11.Location = new System.Drawing.Point(9, 95);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.Size = new System.Drawing.Size(107, 15);
             this.label11.TabIndex = 6;
             this.label11.Text = "Manual Filename:";
             // 
@@ -421,7 +430,7 @@
             this.comboBoxLstNaming.Items.AddRange(new object[] {
             "Auto",
             "Manual"});
-            this.comboBoxLstNaming.Location = new System.Drawing.Point(111, 65);
+            this.comboBoxLstNaming.Location = new System.Drawing.Point(117, 65);
             this.comboBoxLstNaming.Name = "comboBoxLstNaming";
             this.comboBoxLstNaming.Size = new System.Drawing.Size(145, 21);
             this.comboBoxLstNaming.TabIndex = 5;
@@ -430,15 +439,15 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 68);
+            this.label12.Location = new System.Drawing.Point(9, 68);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 13);
+            this.label12.Size = new System.Drawing.Size(77, 15);
             this.label12.TabIndex = 4;
             this.label12.Text = "File Naming:";
             // 
             // textBoxLstDirectory
             // 
-            this.textBoxLstDirectory.Location = new System.Drawing.Point(111, 38);
+            this.textBoxLstDirectory.Location = new System.Drawing.Point(117, 38);
             this.textBoxLstDirectory.Name = "textBoxLstDirectory";
             this.textBoxLstDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxLstDirectory.TabIndex = 3;
@@ -448,18 +457,18 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(19, 41);
+            this.label13.Location = new System.Drawing.Point(9, 41);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.Size = new System.Drawing.Size(97, 15);
             this.label13.TabIndex = 2;
             this.label13.Text = "Output Directory:";
             // 
             // checkBoxTimer
             // 
             this.checkBoxTimer.AutoSize = true;
-            this.checkBoxTimer.Location = new System.Drawing.Point(304, 313);
+            this.checkBoxTimer.Location = new System.Drawing.Point(304, 338);
             this.checkBoxTimer.Name = "checkBoxTimer";
-            this.checkBoxTimer.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxTimer.Size = new System.Drawing.Size(142, 19);
             this.checkBoxTimer.TabIndex = 0;
             this.checkBoxTimer.Text = "Time each Assembly";
             this.checkBoxTimer.UseVisualStyleBackColor = true;
@@ -474,7 +483,7 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.textBoxExpDirectory);
             this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Location = new System.Drawing.Point(8, 141);
+            this.groupBox4.Location = new System.Drawing.Point(8, 166);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(275, 122);
             this.groupBox4.TabIndex = 9;
@@ -486,9 +495,9 @@
             this.checkBoxExpEnable.AutoSize = true;
             this.checkBoxExpEnable.Checked = true;
             this.checkBoxExpEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxExpEnable.Location = new System.Drawing.Point(111, 15);
+            this.checkBoxExpEnable.Location = new System.Drawing.Point(117, 15);
             this.checkBoxExpEnable.Name = "checkBoxExpEnable";
-            this.checkBoxExpEnable.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxExpEnable.Size = new System.Drawing.Size(129, 19);
             this.checkBoxExpEnable.TabIndex = 8;
             this.checkBoxExpEnable.Text = "Enable Export File";
             this.checkBoxExpEnable.UseVisualStyleBackColor = true;
@@ -498,7 +507,7 @@
             // 
             this.textBoxExpManualFilename.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBoxExpManualFilename.Enabled = false;
-            this.textBoxExpManualFilename.Location = new System.Drawing.Point(111, 92);
+            this.textBoxExpManualFilename.Location = new System.Drawing.Point(117, 92);
             this.textBoxExpManualFilename.Name = "textBoxExpManualFilename";
             this.textBoxExpManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxExpManualFilename.TabIndex = 7;
@@ -507,9 +516,9 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 95);
+            this.label8.Location = new System.Drawing.Point(9, 95);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 13);
+            this.label8.Size = new System.Drawing.Size(107, 15);
             this.label8.TabIndex = 6;
             this.label8.Text = "Manual Filename:";
             // 
@@ -519,7 +528,7 @@
             this.comboBoxExpNaming.Items.AddRange(new object[] {
             "Auto",
             "Manual"});
-            this.comboBoxExpNaming.Location = new System.Drawing.Point(111, 65);
+            this.comboBoxExpNaming.Location = new System.Drawing.Point(117, 65);
             this.comboBoxExpNaming.Name = "comboBoxExpNaming";
             this.comboBoxExpNaming.Size = new System.Drawing.Size(145, 21);
             this.comboBoxExpNaming.TabIndex = 5;
@@ -528,15 +537,15 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 68);
+            this.label9.Location = new System.Drawing.Point(9, 68);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 13);
+            this.label9.Size = new System.Drawing.Size(77, 15);
             this.label9.TabIndex = 4;
             this.label9.Text = "File Naming:";
             // 
             // textBoxExpDirectory
             // 
-            this.textBoxExpDirectory.Location = new System.Drawing.Point(111, 38);
+            this.textBoxExpDirectory.Location = new System.Drawing.Point(117, 38);
             this.textBoxExpDirectory.Name = "textBoxExpDirectory";
             this.textBoxExpDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxExpDirectory.TabIndex = 3;
@@ -546,9 +555,9 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(19, 41);
+            this.label10.Location = new System.Drawing.Point(9, 41);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.Size = new System.Drawing.Size(97, 15);
             this.label10.TabIndex = 2;
             this.label10.Text = "Output Directory:";
             // 
@@ -561,7 +570,7 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.textBoxSymDirectory);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Location = new System.Drawing.Point(8, 16);
+            this.groupBox3.Location = new System.Drawing.Point(8, 41);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(275, 121);
             this.groupBox3.TabIndex = 8;
@@ -573,9 +582,9 @@
             this.checkBoxSymEnable.AutoSize = true;
             this.checkBoxSymEnable.Checked = true;
             this.checkBoxSymEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSymEnable.Location = new System.Drawing.Point(111, 15);
+            this.checkBoxSymEnable.Location = new System.Drawing.Point(117, 15);
             this.checkBoxSymEnable.Name = "checkBoxSymEnable";
-            this.checkBoxSymEnable.Size = new System.Drawing.Size(115, 17);
+            this.checkBoxSymEnable.Size = new System.Drawing.Size(135, 19);
             this.checkBoxSymEnable.TabIndex = 9;
             this.checkBoxSymEnable.Text = "Enable Symbol File";
             this.checkBoxSymEnable.UseVisualStyleBackColor = true;
@@ -585,7 +594,7 @@
             // 
             this.textBoxSymManualFilename.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBoxSymManualFilename.Enabled = false;
-            this.textBoxSymManualFilename.Location = new System.Drawing.Point(111, 92);
+            this.textBoxSymManualFilename.Location = new System.Drawing.Point(117, 92);
             this.textBoxSymManualFilename.Name = "textBoxSymManualFilename";
             this.textBoxSymManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxSymManualFilename.TabIndex = 7;
@@ -594,9 +603,9 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 95);
+            this.label5.Location = new System.Drawing.Point(9, 95);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.Size = new System.Drawing.Size(107, 15);
             this.label5.TabIndex = 6;
             this.label5.Text = "Manual Filename:";
             // 
@@ -606,7 +615,7 @@
             this.comboBoxSymNaming.Items.AddRange(new object[] {
             "Auto",
             "Manual"});
-            this.comboBoxSymNaming.Location = new System.Drawing.Point(111, 65);
+            this.comboBoxSymNaming.Location = new System.Drawing.Point(117, 65);
             this.comboBoxSymNaming.Name = "comboBoxSymNaming";
             this.comboBoxSymNaming.Size = new System.Drawing.Size(145, 21);
             this.comboBoxSymNaming.TabIndex = 5;
@@ -615,15 +624,15 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 68);
+            this.label6.Location = new System.Drawing.Point(9, 68);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.Size = new System.Drawing.Size(77, 15);
             this.label6.TabIndex = 4;
             this.label6.Text = "File Naming:";
             // 
             // textBoxSymDirectory
             // 
-            this.textBoxSymDirectory.Location = new System.Drawing.Point(111, 38);
+            this.textBoxSymDirectory.Location = new System.Drawing.Point(117, 38);
             this.textBoxSymDirectory.Name = "textBoxSymDirectory";
             this.textBoxSymDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxSymDirectory.TabIndex = 3;
@@ -633,9 +642,9 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 41);
+            this.label7.Location = new System.Drawing.Point(9, 41);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 13);
+            this.label7.Size = new System.Drawing.Size(97, 15);
             this.label7.TabIndex = 2;
             this.label7.Text = "Output Directory:";
             // 
@@ -651,7 +660,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBoxObjFormat);
-            this.groupBox1.Location = new System.Drawing.Point(289, 16);
+            this.groupBox1.Location = new System.Drawing.Point(289, 41);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(275, 175);
             this.groupBox1.TabIndex = 0;
@@ -661,7 +670,7 @@
             // numericUpDownObjFill
             // 
             this.numericUpDownObjFill.Hexadecimal = true;
-            this.numericUpDownObjFill.Location = new System.Drawing.Point(111, 132);
+            this.numericUpDownObjFill.Location = new System.Drawing.Point(119, 132);
             this.numericUpDownObjFill.Maximum = new decimal(new int[] {
             255,
             0,
@@ -675,9 +684,9 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(20, 134);
+            this.label14.Location = new System.Drawing.Point(15, 134);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(52, 13);
+            this.label14.Size = new System.Drawing.Size(60, 15);
             this.label14.TabIndex = 8;
             this.label14.Text = "Fill Value:";
             // 
@@ -685,7 +694,7 @@
             // 
             this.textBoxObjManualFilename.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBoxObjManualFilename.Enabled = false;
-            this.textBoxObjManualFilename.Location = new System.Drawing.Point(112, 103);
+            this.textBoxObjManualFilename.Location = new System.Drawing.Point(120, 103);
             this.textBoxObjManualFilename.Name = "textBoxObjManualFilename";
             this.textBoxObjManualFilename.Size = new System.Drawing.Size(145, 20);
             this.textBoxObjManualFilename.TabIndex = 7;
@@ -694,9 +703,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 106);
+            this.label4.Location = new System.Drawing.Point(15, 106);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 13);
+            this.label4.Size = new System.Drawing.Size(107, 15);
             this.label4.TabIndex = 6;
             this.label4.Text = "Manual Filename:";
             // 
@@ -706,7 +715,7 @@
             this.comboBoxObjNaming.Items.AddRange(new object[] {
             "Auto",
             "Manual"});
-            this.comboBoxObjNaming.Location = new System.Drawing.Point(112, 76);
+            this.comboBoxObjNaming.Location = new System.Drawing.Point(120, 76);
             this.comboBoxObjNaming.Name = "comboBoxObjNaming";
             this.comboBoxObjNaming.Size = new System.Drawing.Size(145, 21);
             this.comboBoxObjNaming.TabIndex = 5;
@@ -715,15 +724,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 79);
+            this.label3.Location = new System.Drawing.Point(15, 79);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(77, 15);
             this.label3.TabIndex = 4;
             this.label3.Text = "File Naming:";
             // 
             // textBoxObjDirectory
             // 
-            this.textBoxObjDirectory.Location = new System.Drawing.Point(112, 48);
+            this.textBoxObjDirectory.Location = new System.Drawing.Point(120, 48);
             this.textBoxObjDirectory.Name = "textBoxObjDirectory";
             this.textBoxObjDirectory.Size = new System.Drawing.Size(145, 20);
             this.textBoxObjDirectory.TabIndex = 3;
@@ -733,18 +742,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 51);
+            this.label2.Location = new System.Drawing.Point(15, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.Size = new System.Drawing.Size(97, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "Output Directory:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 25);
+            this.label1.Location = new System.Drawing.Point(15, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 13);
+            this.label1.Size = new System.Drawing.Size(88, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Output Format:";
             // 
@@ -757,7 +766,7 @@
             "Motorola Hex (-g2)",
             "Binary (-g3)",
             "Intel Hex with Word Addresses (-g4)"});
-            this.comboBoxObjFormat.Location = new System.Drawing.Point(112, 20);
+            this.comboBoxObjFormat.Location = new System.Drawing.Point(120, 20);
             this.comboBoxObjFormat.Name = "comboBoxObjFormat";
             this.comboBoxObjFormat.Size = new System.Drawing.Size(145, 21);
             this.comboBoxObjFormat.TabIndex = 0;
@@ -859,6 +868,7 @@
             // 
             // toolStrip3
             // 
+            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip3.Location = new System.Drawing.Point(3, 3);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.Size = new System.Drawing.Size(561, 25);
@@ -888,6 +898,7 @@
             // 
             // toolStrip2
             // 
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonNew,
             this.toolStripButtonOpen,
@@ -895,9 +906,9 @@
             this.toolStripSeparator1,
             this.toolStripButtonBuild,
             this.toolStripButtonRun});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 28);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(583, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(583, 27);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -907,7 +918,7 @@
             this.toolStripButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNew.Image")));
             this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonNew.Name = "toolStripButtonNew";
-            this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNew.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonNew.Text = "Create New TASM Project";
             this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
             // 
@@ -917,7 +928,7 @@
             this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
             this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOpen.Name = "toolStripButtonOpen";
-            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonOpen.Text = "Open TASM Project";
             this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
             // 
@@ -927,14 +938,14 @@
             this.toolStripButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSave.Image")));
             this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSave.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonSave.Text = "Save Project";
             this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonBuild
             // 
@@ -942,7 +953,7 @@
             this.toolStripButtonBuild.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBuild.Image")));
             this.toolStripButtonBuild.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBuild.Name = "toolStripButtonBuild";
-            this.toolStripButtonBuild.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonBuild.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonBuild.Text = "Build Current Project";
             this.toolStripButtonBuild.Click += new System.EventHandler(this.toolStripButtonBuild_Click);
             // 
@@ -952,37 +963,39 @@
             this.toolStripButtonRun.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRun.Image")));
             this.toolStripButtonRun.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRun.Name = "toolStripButtonRun";
-            this.toolStripButtonRun.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRun.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonRun.Text = "Run Current Project";
             this.toolStripButtonRun.Click += new System.EventHandler(this.toolStripButtonRun_Click);
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 508);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(583, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(583, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(568, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(568, 20);
             this.toolStripStatusLabel.Spring = true;
             this.toolStripStatusLabel.Text = "Ready...";
             this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // menuStripMain
             // 
+            this.menuStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.projectToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(583, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(583, 28);
             this.menuStripMain.TabIndex = 3;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -998,57 +1011,57 @@
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.saveAsToolStripMenuItem.Text = "Save As..";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(188, 6);
             // 
             // recentProjectsToolStripMenuItem
             // 
             this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
-            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.recentProjectsToolStripMenuItem.Text = "Recent Projects..";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(188, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1058,20 +1071,20 @@
             this.buildToolStripMenuItem,
             this.runToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.projectToolStripMenuItem.Text = "Project";
             // 
             // buildToolStripMenuItem
             // 
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.buildToolStripMenuItem.Text = "Build";
             this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
@@ -1080,21 +1093,54 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 13);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(107, 15);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "TASM Executable:";
+            // 
+            // textBoxTASMExecutable
+            // 
+            this.textBoxTASMExecutable.Location = new System.Drawing.Point(125, 10);
+            this.textBoxTASMExecutable.Name = "textBoxTASMExecutable";
+            this.textBoxTASMExecutable.Size = new System.Drawing.Size(145, 20);
+            this.textBoxTASMExecutable.TabIndex = 10;
+            this.textBoxTASMExecutable.Text = "tasmx.exe";
+            // 
+            // textBoxCompilerTableParameter
+            // 
+            this.textBoxCompilerTableParameter.Location = new System.Drawing.Point(408, 10);
+            this.textBoxCompilerTableParameter.Name = "textBoxCompilerTableParameter";
+            this.textBoxCompilerTableParameter.Size = new System.Drawing.Size(145, 20);
+            this.textBoxCompilerTableParameter.TabIndex = 13;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(294, 13);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(102, 15);
+            this.label19.TabIndex = 14;
+            this.label19.Text = "Table Parameter:";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(583, 492);
+            this.ClientSize = new System.Drawing.Size(583, 533);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
@@ -1241,6 +1287,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxCompilerTableParameter;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBoxTASMExecutable;
+        private System.Windows.Forms.Label label18;
     }
 }
 
