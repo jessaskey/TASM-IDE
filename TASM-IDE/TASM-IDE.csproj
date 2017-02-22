@@ -85,6 +85,12 @@
     <Compile Include="Containers\FileOptions.cs" />
     <Compile Include="Containers\Project.cs" />
     <Compile Include="Containers\ProjectFile.cs" />
+    <Compile Include="Dialogs\ProgramSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ProgramSettings.Designer.cs">
+      <DependentUpon>ProgramSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ProjectFileEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\ProgramSettings.resx">
+      <DependentUpon>ProgramSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ProjectFileEditor.resx">
       <DependentUpon>ProjectFileEditor.cs</DependentUpon>
     </EmbeddedResource>

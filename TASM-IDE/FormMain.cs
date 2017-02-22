@@ -1087,5 +1087,17 @@ namespace TASM_IDE
                 }           
             }
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dialogs.ProgramSettings ps = new Dialogs.ProgramSettings();
+            ps.EditorExecutable = Properties.Settings.Default.DefaultEditor;
+            DialogResult dr = ps.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                Properties.Settings.Default.DefaultEditor = ps.EditorExecutable;
+                Properties.Settings.Default.Save();
+            }
+        }
     }
 }
