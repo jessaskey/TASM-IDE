@@ -442,6 +442,7 @@ namespace TASM_IDE
 
         private bool BuildProject(Project project, string projectFileName)
         {
+            Cursor.Current = Cursors.WaitCursor;
 
             toolStripStatusLabel.Text = "Starting Build...";
             Application.DoEvents();
@@ -581,6 +582,8 @@ namespace TASM_IDE
             {
                 toolStripStatusLabel.Text = "Build Sucessful.";
             }
+
+            Cursor.Current = Cursors.Default;
 
             return true;
             
