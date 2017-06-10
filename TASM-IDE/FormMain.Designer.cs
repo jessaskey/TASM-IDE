@@ -126,10 +126,10 @@
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -157,11 +157,11 @@
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 51);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 55);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(777, 583);
+            this.tabControlMain.Size = new System.Drawing.Size(777, 576);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPage1
@@ -172,7 +172,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(769, 554);
+            this.tabPage1.Size = new System.Drawing.Size(769, 547);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             this.objectListViewFiles.Margin = new System.Windows.Forms.Padding(4);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
-            this.objectListViewFiles.Size = new System.Drawing.Size(761, 519);
+            this.objectListViewFiles.Size = new System.Drawing.Size(761, 512);
             this.objectListViewFiles.TabIndex = 1;
             this.objectListViewFiles.UseCompatibleStateImageBehavior = false;
             this.objectListViewFiles.View = System.Windows.Forms.View.Details;
@@ -308,7 +308,7 @@
             this.label19.Location = new System.Drawing.Point(392, 16);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(113, 16);
+            this.label19.Size = new System.Drawing.Size(118, 17);
             this.label19.TabIndex = 14;
             this.label19.Text = "Table Parameter:";
             // 
@@ -327,7 +327,7 @@
             this.label18.Location = new System.Drawing.Point(11, 16);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(119, 16);
+            this.label18.Size = new System.Drawing.Size(123, 17);
             this.label18.TabIndex = 10;
             this.label18.Text = "TASM Executable:";
             // 
@@ -337,7 +337,7 @@
             this.checkBoxIgnoreCase.Location = new System.Drawing.Point(405, 468);
             this.checkBoxIgnoreCase.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
-            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(162, 20);
+            this.checkBoxIgnoreCase.Size = new System.Drawing.Size(172, 21);
             this.checkBoxIgnoreCase.TabIndex = 12;
             this.checkBoxIgnoreCase.Text = "Ignore Case on Labels";
             this.checkBoxIgnoreCase.UseVisualStyleBackColor = true;
@@ -349,7 +349,7 @@
             this.checkBoxExpandSource.Location = new System.Drawing.Point(405, 444);
             this.checkBoxExpandSource.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxExpandSource.Name = "checkBoxExpandSource";
-            this.checkBoxExpandSource.Size = new System.Drawing.Size(214, 20);
+            this.checkBoxExpandSource.Size = new System.Drawing.Size(229, 21);
             this.checkBoxExpandSource.TabIndex = 11;
             this.checkBoxExpandSource.Text = "Expand Macro Source in Listing";
             this.checkBoxExpandSource.UseVisualStyleBackColor = true;
@@ -387,7 +387,7 @@
             this.label17.Location = new System.Drawing.Point(16, 100);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(35, 16);
+            this.label17.Size = new System.Drawing.Size(38, 17);
             this.label17.TabIndex = 4;
             this.label17.Text = "Run:";
             // 
@@ -397,7 +397,7 @@
             this.label16.Location = new System.Drawing.Point(16, 66);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(72, 16);
+            this.label16.Size = new System.Drawing.Size(76, 17);
             this.label16.TabIndex = 3;
             this.label16.Text = "Post-Build:";
             // 
@@ -417,7 +417,7 @@
             this.label15.Location = new System.Drawing.Point(16, 33);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(66, 16);
+            this.label15.Size = new System.Drawing.Size(70, 17);
             this.label15.TabIndex = 1;
             this.label15.Text = "Pre-Build:";
             // 
@@ -456,7 +456,7 @@
             this.checkBoxLstEnable.Location = new System.Drawing.Point(156, 18);
             this.checkBoxLstEnable.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxLstEnable.Name = "checkBoxLstEnable";
-            this.checkBoxLstEnable.Size = new System.Drawing.Size(136, 20);
+            this.checkBoxLstEnable.Size = new System.Drawing.Size(145, 21);
             this.checkBoxLstEnable.TabIndex = 10;
             this.checkBoxLstEnable.Text = "Enable Listing File";
             this.checkBoxLstEnable.UseVisualStyleBackColor = true;
@@ -479,7 +479,7 @@
             this.label11.Location = new System.Drawing.Point(12, 117);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(114, 16);
+            this.label11.Size = new System.Drawing.Size(119, 17);
             this.label11.TabIndex = 6;
             this.label11.Text = "Manual Filename:";
             // 
@@ -502,7 +502,7 @@
             this.label12.Location = new System.Drawing.Point(12, 84);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(83, 16);
+            this.label12.Size = new System.Drawing.Size(86, 17);
             this.label12.TabIndex = 4;
             this.label12.Text = "File Naming:";
             // 
@@ -522,7 +522,7 @@
             this.label13.Location = new System.Drawing.Point(12, 50);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 16);
+            this.label13.Size = new System.Drawing.Size(116, 17);
             this.label13.TabIndex = 2;
             this.label13.Text = "Output Directory:";
             // 
@@ -532,7 +532,7 @@
             this.checkBoxTimer.Location = new System.Drawing.Point(405, 422);
             this.checkBoxTimer.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxTimer.Name = "checkBoxTimer";
-            this.checkBoxTimer.Size = new System.Drawing.Size(154, 20);
+            this.checkBoxTimer.Size = new System.Drawing.Size(160, 21);
             this.checkBoxTimer.TabIndex = 0;
             this.checkBoxTimer.Text = "Time each Assembly";
             this.checkBoxTimer.UseVisualStyleBackColor = true;
@@ -564,7 +564,7 @@
             this.checkBoxExpEnable.Location = new System.Drawing.Point(156, 18);
             this.checkBoxExpEnable.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxExpEnable.Name = "checkBoxExpEnable";
-            this.checkBoxExpEnable.Size = new System.Drawing.Size(136, 20);
+            this.checkBoxExpEnable.Size = new System.Drawing.Size(144, 21);
             this.checkBoxExpEnable.TabIndex = 8;
             this.checkBoxExpEnable.Text = "Enable Export File";
             this.checkBoxExpEnable.UseVisualStyleBackColor = true;
@@ -587,7 +587,7 @@
             this.label8.Location = new System.Drawing.Point(12, 117);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(114, 16);
+            this.label8.Size = new System.Drawing.Size(119, 17);
             this.label8.TabIndex = 6;
             this.label8.Text = "Manual Filename:";
             // 
@@ -610,7 +610,7 @@
             this.label9.Location = new System.Drawing.Point(12, 84);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 16);
+            this.label9.Size = new System.Drawing.Size(86, 17);
             this.label9.TabIndex = 4;
             this.label9.Text = "File Naming:";
             // 
@@ -630,7 +630,7 @@
             this.label10.Location = new System.Drawing.Point(12, 50);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(106, 16);
+            this.label10.Size = new System.Drawing.Size(116, 17);
             this.label10.TabIndex = 2;
             this.label10.Text = "Output Directory:";
             // 
@@ -660,7 +660,7 @@
             this.checkBoxSymEnable.Location = new System.Drawing.Point(156, 18);
             this.checkBoxSymEnable.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxSymEnable.Name = "checkBoxSymEnable";
-            this.checkBoxSymEnable.Size = new System.Drawing.Size(144, 20);
+            this.checkBoxSymEnable.Size = new System.Drawing.Size(150, 21);
             this.checkBoxSymEnable.TabIndex = 9;
             this.checkBoxSymEnable.Text = "Enable Symbol File";
             this.checkBoxSymEnable.UseVisualStyleBackColor = true;
@@ -683,7 +683,7 @@
             this.label5.Location = new System.Drawing.Point(12, 117);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(114, 16);
+            this.label5.Size = new System.Drawing.Size(119, 17);
             this.label5.TabIndex = 6;
             this.label5.Text = "Manual Filename:";
             // 
@@ -706,7 +706,7 @@
             this.label6.Location = new System.Drawing.Point(12, 84);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 16);
+            this.label6.Size = new System.Drawing.Size(86, 17);
             this.label6.TabIndex = 4;
             this.label6.Text = "File Naming:";
             // 
@@ -726,7 +726,7 @@
             this.label7.Location = new System.Drawing.Point(12, 50);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 16);
+            this.label7.Size = new System.Drawing.Size(116, 17);
             this.label7.TabIndex = 2;
             this.label7.Text = "Output Directory:";
             // 
@@ -758,7 +758,7 @@
             this.checkBoxContiguousBlockOutput.Location = new System.Drawing.Point(24, 194);
             this.checkBoxContiguousBlockOutput.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxContiguousBlockOutput.Name = "checkBoxContiguousBlockOutput";
-            this.checkBoxContiguousBlockOutput.Size = new System.Drawing.Size(172, 20);
+            this.checkBoxContiguousBlockOutput.Size = new System.Drawing.Size(186, 21);
             this.checkBoxContiguousBlockOutput.TabIndex = 15;
             this.checkBoxContiguousBlockOutput.Text = "Contiguous Block Output";
             this.checkBoxContiguousBlockOutput.UseVisualStyleBackColor = true;
@@ -784,7 +784,7 @@
             this.label14.Location = new System.Drawing.Point(20, 165);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(66, 16);
+            this.label14.Size = new System.Drawing.Size(69, 17);
             this.label14.TabIndex = 8;
             this.label14.Text = "Fill Value:";
             // 
@@ -805,7 +805,7 @@
             this.label4.Location = new System.Drawing.Point(20, 130);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 16);
+            this.label4.Size = new System.Drawing.Size(119, 17);
             this.label4.TabIndex = 6;
             this.label4.Text = "Manual Filename:";
             // 
@@ -828,7 +828,7 @@
             this.label3.Location = new System.Drawing.Point(20, 97);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 16);
+            this.label3.Size = new System.Drawing.Size(86, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "File Naming:";
             // 
@@ -848,7 +848,7 @@
             this.label2.Location = new System.Drawing.Point(20, 63);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 16);
+            this.label2.Size = new System.Drawing.Size(116, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Output Directory:";
             // 
@@ -858,7 +858,7 @@
             this.label1.Location = new System.Drawing.Point(20, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 16);
+            this.label1.Size = new System.Drawing.Size(103, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Output Format:";
             // 
@@ -941,6 +941,8 @@
             this.objectListViewCompileFormatted.TabIndex = 1;
             this.objectListViewCompileFormatted.UseCompatibleStateImageBehavior = false;
             this.objectListViewCompileFormatted.View = System.Windows.Forms.View.Details;
+            this.objectListViewCompileFormatted.CellToolTipShowing += new System.EventHandler<BrightIdeasSoftware.ToolTipShowingEventArgs>(this.objectListViewCompileFormatted_CellToolTipShowing);
+            this.objectListViewCompileFormatted.SelectedIndexChanged += new System.EventHandler(this.objectListViewCompileFormatted_SelectedIndexChanged);
             this.objectListViewCompileFormatted.DoubleClick += new System.EventHandler(this.objectListViewCompileFormatted_DoubleClick);
             // 
             // olvCompileItemColumnImage
@@ -992,7 +994,7 @@
             this.tabPageCompileOutputRaw.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageCompileOutputRaw.Name = "tabPageCompileOutputRaw";
             this.tabPageCompileOutputRaw.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(761, 500);
+            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(761, 518);
             this.tabPageCompileOutputRaw.TabIndex = 0;
             this.tabPageCompileOutputRaw.Text = "Raw";
             this.tabPageCompileOutputRaw.UseVisualStyleBackColor = true;
@@ -1005,7 +1007,7 @@
             this.textBoxCompileOutputRaw.Multiline = true;
             this.textBoxCompileOutputRaw.Name = "textBoxCompileOutputRaw";
             this.textBoxCompileOutputRaw.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(753, 492);
+            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(753, 510);
             this.textBoxCompileOutputRaw.TabIndex = 0;
             // 
             // toolStrip2
@@ -1018,7 +1020,7 @@
             this.toolStripSeparator1,
             this.toolStripButtonBuild,
             this.toolStripButtonRun});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 28);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(777, 27);
             this.toolStrip2.TabIndex = 1;
@@ -1084,17 +1086,17 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 634);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 631);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(777, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(777, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(757, 17);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(757, 20);
             this.toolStripStatusLabel.Spring = true;
             this.toolStripStatusLabel.Text = "Ready...";
             this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1110,7 +1112,7 @@
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStripMain.Size = new System.Drawing.Size(777, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(777, 28);
             this.menuStripMain.TabIndex = 3;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -1126,57 +1128,57 @@
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.saveAsToolStripMenuItem.Text = "Save As..";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(188, 6);
             // 
             // recentProjectsToolStripMenuItem
             // 
             this.recentProjectsToolStripMenuItem.Name = "recentProjectsToolStripMenuItem";
-            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.recentProjectsToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.recentProjectsToolStripMenuItem.Text = "Recent Projects..";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(188, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1186,52 +1188,52 @@
             this.buildToolStripMenuItem,
             this.runToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.projectToolStripMenuItem.Text = "Project";
             // 
             // buildToolStripMenuItem
             // 
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
             this.buildToolStripMenuItem.Text = "Build";
             this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
             // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(118, 26);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -1246,7 +1248,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripMain;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
