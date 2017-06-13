@@ -54,7 +54,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxPreBuildCommand = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBoxRunCommand = new System.Windows.Forms.TextBox();
+            this.textBoxRunDebugCommand = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBoxLstEnable = new System.Windows.Forms.CheckBox();
             this.textBoxLstManualFilename = new System.Windows.Forms.TextBox();
@@ -111,6 +111,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonBuild = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRun = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBoxBuild = new System.Windows.Forms.ToolStripComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
@@ -130,6 +131,8 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxRunReleaseCommand = new System.Windows.Forms.TextBox();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -157,11 +160,11 @@
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 55);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 56);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(777, 576);
+            this.tabControlMain.Size = new System.Drawing.Size(777, 575);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPage1
@@ -172,7 +175,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(769, 547);
+            this.tabPage1.Size = new System.Drawing.Size(769, 546);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Project Files";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -192,7 +195,7 @@
             this.objectListViewFiles.Margin = new System.Windows.Forms.Padding(4);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
-            this.objectListViewFiles.Size = new System.Drawing.Size(761, 512);
+            this.objectListViewFiles.Size = new System.Drawing.Size(761, 511);
             this.objectListViewFiles.TabIndex = 1;
             this.objectListViewFiles.UseCompatibleStateImageBehavior = false;
             this.objectListViewFiles.View = System.Windows.Forms.View.Details;
@@ -289,7 +292,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(769, 547);
+            this.tabPage2.Size = new System.Drawing.Size(769, 546);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Compile Options";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -334,7 +337,7 @@
             // checkBoxIgnoreCase
             // 
             this.checkBoxIgnoreCase.AutoSize = true;
-            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(405, 468);
+            this.checkBoxIgnoreCase.Location = new System.Drawing.Point(404, 502);
             this.checkBoxIgnoreCase.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxIgnoreCase.Name = "checkBoxIgnoreCase";
             this.checkBoxIgnoreCase.Size = new System.Drawing.Size(172, 21);
@@ -346,7 +349,7 @@
             // checkBoxExpandSource
             // 
             this.checkBoxExpandSource.AutoSize = true;
-            this.checkBoxExpandSource.Location = new System.Drawing.Point(405, 444);
+            this.checkBoxExpandSource.Location = new System.Drawing.Point(404, 478);
             this.checkBoxExpandSource.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxExpandSource.Name = "checkBoxExpandSource";
             this.checkBoxExpandSource.Size = new System.Drawing.Size(229, 21);
@@ -357,27 +360,29 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.textBoxRunReleaseCommand);
+            this.groupBox5.Controls.Add(this.label20);
             this.groupBox5.Controls.Add(this.textBoxPostBuildCommand);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.label16);
             this.groupBox5.Controls.Add(this.textBoxPreBuildCommand);
             this.groupBox5.Controls.Add(this.label15);
-            this.groupBox5.Controls.Add(this.textBoxRunCommand);
+            this.groupBox5.Controls.Add(this.textBoxRunDebugCommand);
             this.groupBox5.Location = new System.Drawing.Point(385, 281);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(367, 134);
+            this.groupBox5.Size = new System.Drawing.Size(367, 167);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other Processing:";
             // 
             // textBoxPostBuildCommand
             // 
-            this.textBoxPostBuildCommand.Location = new System.Drawing.Point(100, 63);
+            this.textBoxPostBuildCommand.Location = new System.Drawing.Point(118, 63);
             this.textBoxPostBuildCommand.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPostBuildCommand.Name = "textBoxPostBuildCommand";
-            this.textBoxPostBuildCommand.Size = new System.Drawing.Size(257, 22);
+            this.textBoxPostBuildCommand.Size = new System.Drawing.Size(239, 22);
             this.textBoxPostBuildCommand.TabIndex = 5;
             this.textBoxPostBuildCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
@@ -387,9 +392,9 @@
             this.label17.Location = new System.Drawing.Point(16, 100);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(38, 17);
+            this.label17.Size = new System.Drawing.Size(94, 17);
             this.label17.TabIndex = 4;
-            this.label17.Text = "Run:";
+            this.label17.Text = "Run (Debug):";
             // 
             // label16
             // 
@@ -403,10 +408,10 @@
             // 
             // textBoxPreBuildCommand
             // 
-            this.textBoxPreBuildCommand.Location = new System.Drawing.Point(100, 30);
+            this.textBoxPreBuildCommand.Location = new System.Drawing.Point(118, 30);
             this.textBoxPreBuildCommand.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPreBuildCommand.Name = "textBoxPreBuildCommand";
-            this.textBoxPreBuildCommand.Size = new System.Drawing.Size(257, 22);
+            this.textBoxPreBuildCommand.Size = new System.Drawing.Size(239, 22);
             this.textBoxPreBuildCommand.TabIndex = 2;
             this.textBoxPreBuildCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             this.textBoxPreBuildCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPreBuildCommand_KeyDown);
@@ -421,14 +426,14 @@
             this.label15.TabIndex = 1;
             this.label15.Text = "Pre-Build:";
             // 
-            // textBoxRunCommand
+            // textBoxRunDebugCommand
             // 
-            this.textBoxRunCommand.Location = new System.Drawing.Point(100, 96);
-            this.textBoxRunCommand.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxRunCommand.Name = "textBoxRunCommand";
-            this.textBoxRunCommand.Size = new System.Drawing.Size(257, 22);
-            this.textBoxRunCommand.TabIndex = 0;
-            this.textBoxRunCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
+            this.textBoxRunDebugCommand.Location = new System.Drawing.Point(118, 96);
+            this.textBoxRunDebugCommand.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxRunDebugCommand.Name = "textBoxRunDebugCommand";
+            this.textBoxRunDebugCommand.Size = new System.Drawing.Size(239, 22);
+            this.textBoxRunDebugCommand.TabIndex = 0;
+            this.textBoxRunDebugCommand.TextChanged += new System.EventHandler(this.CompilationOptions_OnChanged);
             // 
             // groupBox2
             // 
@@ -529,7 +534,7 @@
             // checkBoxTimer
             // 
             this.checkBoxTimer.AutoSize = true;
-            this.checkBoxTimer.Location = new System.Drawing.Point(405, 422);
+            this.checkBoxTimer.Location = new System.Drawing.Point(404, 456);
             this.checkBoxTimer.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxTimer.Name = "checkBoxTimer";
             this.checkBoxTimer.Size = new System.Drawing.Size(160, 21);
@@ -884,7 +889,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(769, 547);
+            this.tabPage3.Size = new System.Drawing.Size(769, 546);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Compile Output";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -898,7 +903,7 @@
             this.tabControlCompileOutput.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlCompileOutput.Name = "tabControlCompileOutput";
             this.tabControlCompileOutput.SelectedIndex = 0;
-            this.tabControlCompileOutput.Size = new System.Drawing.Size(769, 547);
+            this.tabControlCompileOutput.Size = new System.Drawing.Size(769, 546);
             this.tabControlCompileOutput.TabIndex = 0;
             // 
             // tabPageCompileOutputFormatted
@@ -909,7 +914,7 @@
             this.tabPageCompileOutputFormatted.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageCompileOutputFormatted.Name = "tabPageCompileOutputFormatted";
             this.tabPageCompileOutputFormatted.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageCompileOutputFormatted.Size = new System.Drawing.Size(761, 518);
+            this.tabPageCompileOutputFormatted.Size = new System.Drawing.Size(761, 517);
             this.tabPageCompileOutputFormatted.TabIndex = 1;
             this.tabPageCompileOutputFormatted.Text = "Formatted";
             this.tabPageCompileOutputFormatted.UseVisualStyleBackColor = true;
@@ -936,7 +941,7 @@
             this.objectListViewCompileFormatted.MultiSelect = false;
             this.objectListViewCompileFormatted.Name = "objectListViewCompileFormatted";
             this.objectListViewCompileFormatted.ShowGroups = false;
-            this.objectListViewCompileFormatted.Size = new System.Drawing.Size(753, 485);
+            this.objectListViewCompileFormatted.Size = new System.Drawing.Size(753, 484);
             this.objectListViewCompileFormatted.SmallImageList = this.imageListCompileOutputs;
             this.objectListViewCompileFormatted.TabIndex = 1;
             this.objectListViewCompileFormatted.UseCompatibleStateImageBehavior = false;
@@ -994,7 +999,7 @@
             this.tabPageCompileOutputRaw.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageCompileOutputRaw.Name = "tabPageCompileOutputRaw";
             this.tabPageCompileOutputRaw.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(761, 518);
+            this.tabPageCompileOutputRaw.Size = new System.Drawing.Size(761, 517);
             this.tabPageCompileOutputRaw.TabIndex = 0;
             this.tabPageCompileOutputRaw.Text = "Raw";
             this.tabPageCompileOutputRaw.UseVisualStyleBackColor = true;
@@ -1007,7 +1012,7 @@
             this.textBoxCompileOutputRaw.Multiline = true;
             this.textBoxCompileOutputRaw.Name = "textBoxCompileOutputRaw";
             this.textBoxCompileOutputRaw.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(753, 510);
+            this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(753, 509);
             this.textBoxCompileOutputRaw.TabIndex = 0;
             // 
             // toolStrip2
@@ -1019,10 +1024,11 @@
             this.toolStripButtonSave,
             this.toolStripSeparator1,
             this.toolStripButtonBuild,
-            this.toolStripButtonRun});
+            this.toolStripButtonRun,
+            this.toolStripComboBoxBuild});
             this.toolStrip2.Location = new System.Drawing.Point(0, 28);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(777, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(777, 28);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1032,7 +1038,7 @@
             this.toolStripButtonNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonNew.Image")));
             this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonNew.Name = "toolStripButtonNew";
-            this.toolStripButtonNew.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonNew.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonNew.Text = "Create New TASM Project";
             this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
             // 
@@ -1042,7 +1048,7 @@
             this.toolStripButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpen.Image")));
             this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOpen.Name = "toolStripButtonOpen";
-            this.toolStripButtonOpen.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonOpen.Text = "Open TASM Project";
             this.toolStripButtonOpen.Click += new System.EventHandler(this.toolStripButtonOpen_Click);
             // 
@@ -1052,14 +1058,14 @@
             this.toolStripButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSave.Image")));
             this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSave.Name = "toolStripButtonSave";
-            this.toolStripButtonSave.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonSave.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonSave.Text = "Save Project";
             this.toolStripButtonSave.Click += new System.EventHandler(this.toolStripButtonSave_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // toolStripButtonBuild
             // 
@@ -1067,7 +1073,7 @@
             this.toolStripButtonBuild.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBuild.Image")));
             this.toolStripButtonBuild.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonBuild.Name = "toolStripButtonBuild";
-            this.toolStripButtonBuild.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBuild.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonBuild.Text = "Build Current Project";
             this.toolStripButtonBuild.Click += new System.EventHandler(this.toolStripButtonBuild_Click);
             // 
@@ -1077,9 +1083,20 @@
             this.toolStripButtonRun.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRun.Image")));
             this.toolStripButtonRun.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRun.Name = "toolStripButtonRun";
-            this.toolStripButtonRun.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRun.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonRun.Text = "Run Current Project";
             this.toolStripButtonRun.Click += new System.EventHandler(this.toolStripButtonRun_Click);
+            // 
+            // toolStripComboBoxBuild
+            // 
+            this.toolStripComboBoxBuild.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBoxBuild.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.toolStripComboBoxBuild.Items.AddRange(new object[] {
+            "Debug",
+            "Release"});
+            this.toolStripComboBoxBuild.Name = "toolStripComboBoxBuild";
+            this.toolStripComboBoxBuild.Size = new System.Drawing.Size(121, 28);
+            this.toolStripComboBoxBuild.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxBuild_SelectedIndexChanged);
             // 
             // statusStrip1
             // 
@@ -1235,6 +1252,24 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(16, 133);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(104, 17);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Run (Release):";
+            // 
+            // textBoxRunReleaseCommand
+            // 
+            this.textBoxRunReleaseCommand.Location = new System.Drawing.Point(118, 129);
+            this.textBoxRunReleaseCommand.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxRunReleaseCommand.Name = "textBoxRunReleaseCommand";
+            this.textBoxRunReleaseCommand.Size = new System.Drawing.Size(239, 22);
+            this.textBoxRunReleaseCommand.TabIndex = 6;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1340,7 +1375,7 @@
         private System.Windows.Forms.TextBox textBoxLstDirectory;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBoxRunCommand;
+        private System.Windows.Forms.TextBox textBoxRunDebugCommand;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripButton toolStripButtonBuild;
         private System.Windows.Forms.TabControl tabControlCompileOutput;
@@ -1393,6 +1428,9 @@
         private System.Windows.Forms.CheckBox checkBoxContiguousBlockOutput;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxBuild;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxRunReleaseCommand;
     }
 }
 

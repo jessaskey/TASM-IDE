@@ -30,6 +30,8 @@ namespace TASM_IDE
             ResetSettingsToDefault();
             olvCompileItemColumnImage.ImageGetter = CompileItemImageGetter;
             LoadRecentFiles();
+
+            toolStripComboBoxBuild.SelectedIndex = 0;
         }
 
         public object CompileItemImageGetter(object rowObject) {
@@ -235,7 +237,7 @@ namespace TASM_IDE
             textBoxCompilerTableParameter.Text = "-65";
             textBoxPreBuildCommand.Text = "";
             textBoxPostBuildCommand.Text = "";
-            textBoxRunCommand.Text = "";
+            textBoxRunDebugCommand.Text = "";
             checkBoxTimer.Checked = true;
             numericUpDownObjFill.Value = 0;
 
@@ -350,7 +352,8 @@ namespace TASM_IDE
             project.IgnoreCaseInLabels = checkBoxIgnoreCase.Checked;
             project.PreBuildCommand = textBoxPreBuildCommand.Text;
             project.PostBuildCommand = textBoxPostBuildCommand.Text;
-            project.RunCommand = textBoxRunCommand.Text;
+            project.RunCommand = textBoxRunReleaseCommand.Text;
+            project.RunDebugCommand = textBoxRunDebugCommand.Text;
             project.ObjectFillValue = (int)numericUpDownObjFill.Value;
 
             project.ExportFileEnabled = checkBoxExpEnable.Checked;
@@ -412,7 +415,8 @@ namespace TASM_IDE
             textBoxCompilerTableParameter.Text = project.TableParameter;
             textBoxPreBuildCommand.Text = project.PreBuildCommand;
             textBoxPostBuildCommand.Text = project.PostBuildCommand;
-            textBoxRunCommand.Text = project.RunCommand;
+            textBoxRunReleaseCommand.Text = project.RunCommand;
+            textBoxRunDebugCommand.Text = project.RunDebugCommand;
             checkBoxTimer.Checked = project.TimeAssembly;
             checkBoxExpandSource.Checked = project.ExpandSourceInListing;
             checkBoxIgnoreCase.Checked = project.IgnoreCaseInLabels;
@@ -421,6 +425,15 @@ namespace TASM_IDE
             checkBoxExpEnable.Checked = project.ExportFileEnabled;
             checkBoxLstEnable.Checked = project.ListingFileEnabled;
             checkBoxSymEnable.Checked = project.SymbolFileEnabled;
+
+            if (project.ActiveBuild == Project.Build.Debug)
+            {
+                toolStripComboBoxBuild.SelectedIndex = 0;
+            }
+            else
+            {
+                toolStripComboBoxBuild.SelectedIndex = 1;
+            }
         }
 
         private void toolStripButtonBuild_Click(object sender, EventArgs e)
@@ -1133,6 +1146,21 @@ namespace TASM_IDE
         private void objectListViewCompileFormatted_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripComboBoxBuild_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_currentProject != null)
+            {
+                if (toolStripComboBoxBuild.SelectedIndex == 0)
+                {
+                    _currentProject.ActiveBuild = Project.Build.Debug;
+                }
+                else
+                {
+                    _currentProject.ActiveBuild = Project.Build.Release;
+                }
+            }
         }
     }
 }

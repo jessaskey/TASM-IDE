@@ -8,6 +8,12 @@ namespace TASM_IDE.Containers
 {
     public class Project
     {
+        public enum Build
+        {
+            Debug,
+            Release
+        }
+
         public int ProjectVersion = -1;
         public bool IsDirty = true;
         public List<ProjectFile> Files = new List<ProjectFile>();
@@ -20,10 +26,12 @@ namespace TASM_IDE.Containers
         public FileOptions ObjectFileOptions = new FileOptions();
         public ObjectFileFormat ObjectFileFormat = ObjectFileFormat.IntelHex;
         public int ObjectFillValue = 0;
+        public Build ActiveBuild = Build.Debug;
 
         public string PreBuildCommand { get; set; }
         public string PostBuildCommand { get; set; }
         public string RunCommand { get; set; }
+        public string RunDebugCommand { get; set; }
         public bool TimeAssembly { get; set; }
         public bool ExpandSourceInListing { get; set; }
         public bool IgnoreCaseInLabels { get; set; }
