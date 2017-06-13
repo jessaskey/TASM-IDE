@@ -937,11 +937,20 @@ namespace TASM_IDE
 
                 if (_compilerOutputItems.Where(i => i.OutputType == CompileOutputType.Error).Count() == 0)
                 {
-                    if (_currentProject != null && !String.IsNullOrEmpty(_currentProject.RunCommand))
+                    if (_currentProject != null)
                     {
-                        string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
-                        string runCommandOutput = Execute(Path.Combine(currentDirectory,_currentProject.RunCommand), "", "", currentDirectory, false);
-                        textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n","\r\n") + "\r\n";
+                        if (_currentProject.ActiveBuild == Project.Build.Debug && !String.IsNullOrEmpty(_currentProject.RunDebugCommand))
+                        {
+                            string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
+                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunDebugCommand), "", "", currentDirectory, false);
+                            textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                        }
+                        else if(_currentProject.ActiveBuild == Project.Build.Release && !String.IsNullOrEmpty(_currentProject.RunCommand))
+                        {
+                            string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
+                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunCommand), "", "", currentDirectory, false);
+                            textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                        }
                     }
                 }
             }
