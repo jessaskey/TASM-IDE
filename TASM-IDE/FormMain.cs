@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -446,6 +447,7 @@ namespace TASM_IDE
             if (_currentProject != null)
             {
                 BuildProject(_currentProject, _currentProjectFilename);
+                UpdateOBJDetails();
             }
             else
             {
@@ -1170,6 +1172,61 @@ namespace TASM_IDE
                     _currentProject.ActiveBuild = Project.Build.Release;
                 }
             }
+        }
+
+
+        private void UpdateOBJDetails()
+        {
+            listViewObjDetails.Items.Clear();
+
+            string objDirectory = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(_currentProjectFilename)), textBoxObjDirectory.Text.Replace(".\\",""));
+            if (Directory.Exists(objDirectory))
+            {
+                foreach (string file in Directory.GetFiles(objDirectory))
+                {
+                    ListViewItem i = new ListViewItem();
+                    i.Text = Path.GetFileName(file);
+
+                    FileInfo fi = new FileInfo(file);
+                    i.SubItems.Add(fi.Length.ToString());
+
+                    int unusedBytes = GetUnusedBytes(file);
+                    int usedBytes = ((int)fi.Length) - unusedBytes;
+                    if (fi.Length == 0)
+                    {
+                        i.SubItems.Add("ZERO LENGTH");
+                    }
+                    else
+                    {
+                        decimal percentUsed = ((decimal)usedBytes) / ((decimal)fi.Length);
+                        i.SubItems.Add(percentUsed.ToString("P"));
+                    }
+
+
+                    listViewObjDetails.Items.Add(i);
+
+                }
+            }
+        }
+
+        private int GetUnusedBytes(string file)
+        {
+            byte emptyValue = (byte)numericUpDownObjFill.Value;
+            int unusedBytes = 0;
+            int checksum = 0;
+
+            byte[] bytes = File.ReadAllBytes(file);
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                checksum += bytes[i];
+                if (bytes[i] == emptyValue && i < bytes.Length - 1 && bytes[i + 1] == emptyValue)
+                {
+                    unusedBytes++;
+                }
+            }
+
+            return unusedBytes;
         }
     }
 }

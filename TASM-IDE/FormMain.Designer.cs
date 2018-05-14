@@ -49,6 +49,8 @@
             this.checkBoxIgnoreCase = new System.Windows.Forms.CheckBox();
             this.checkBoxExpandSource = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBoxRunReleaseCommand = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.textBoxPostBuildCommand = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -104,6 +106,12 @@
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.tabPageCompileOutputRaw = new System.Windows.Forms.TabPage();
             this.textBoxCompileOutputRaw = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.listViewObjDetails = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
@@ -131,8 +139,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBoxRunReleaseCommand = new System.Windows.Forms.TextBox();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -149,6 +156,7 @@
             this.tabPageCompileOutputFormatted.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewCompileFormatted)).BeginInit();
             this.tabPageCompileOutputRaw.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
@@ -159,6 +167,7 @@
             this.tabControlMain.Controls.Add(this.tabPage1);
             this.tabControlMain.Controls.Add(this.tabPage2);
             this.tabControlMain.Controls.Add(this.tabPage3);
+            this.tabControlMain.Controls.Add(this.tabPage4);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 56);
             this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
@@ -376,6 +385,24 @@
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Other Processing:";
+            // 
+            // textBoxRunReleaseCommand
+            // 
+            this.textBoxRunReleaseCommand.Location = new System.Drawing.Point(118, 129);
+            this.textBoxRunReleaseCommand.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxRunReleaseCommand.Name = "textBoxRunReleaseCommand";
+            this.textBoxRunReleaseCommand.Size = new System.Drawing.Size(239, 22);
+            this.textBoxRunReleaseCommand.TabIndex = 6;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(16, 133);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(104, 17);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Run (Release):";
             // 
             // textBoxPostBuildCommand
             // 
@@ -1015,6 +1042,52 @@
             this.textBoxCompileOutputRaw.Size = new System.Drawing.Size(753, 509);
             this.textBoxCompileOutputRaw.TabIndex = 0;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.listViewObjDetails);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(769, 546);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "OBJ Details";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // listViewObjDetails
+            // 
+            this.listViewObjDetails.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.listViewObjDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewObjDetails.Location = new System.Drawing.Point(0, 0);
+            this.listViewObjDetails.Name = "listViewObjDetails";
+            this.listViewObjDetails.Size = new System.Drawing.Size(769, 546);
+            this.listViewObjDetails.TabIndex = 0;
+            this.listViewObjDetails.UseCompatibleStateImageBehavior = false;
+            this.listViewObjDetails.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Filename";
+            this.columnHeader1.Width = 204;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Size";
+            this.columnHeader2.Width = 98;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "% Used";
+            this.columnHeader3.Width = 105;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "CSUM";
+            this.columnHeader4.Width = 107;
+            // 
             // toolStrip2
             // 
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1252,23 +1325,9 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // label20
+            // columnHeader5
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(16, 133);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(104, 17);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "Run (Release):";
-            // 
-            // textBoxRunReleaseCommand
-            // 
-            this.textBoxRunReleaseCommand.Location = new System.Drawing.Point(118, 129);
-            this.textBoxRunReleaseCommand.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxRunReleaseCommand.Name = "textBoxRunReleaseCommand";
-            this.textBoxRunReleaseCommand.Size = new System.Drawing.Size(239, 22);
-            this.textBoxRunReleaseCommand.TabIndex = 6;
+            this.columnHeader5.Text = "CRC32";
             // 
             // FormMain
             // 
@@ -1315,6 +1374,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewCompileFormatted)).EndInit();
             this.tabPageCompileOutputRaw.ResumeLayout(false);
             this.tabPageCompileOutputRaw.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -1431,6 +1491,13 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxBuild;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBoxRunReleaseCommand;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListView listViewObjDetails;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }
 
