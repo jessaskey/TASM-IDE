@@ -360,6 +360,7 @@ namespace TASM_IDE
             project.ExportFileEnabled = checkBoxExpEnable.Checked;
             project.ListingFileEnabled = checkBoxLstEnable.Checked;
             project.SymbolFileEnabled = checkBoxSymEnable.Checked;
+            project.BuildsToRun = int.Parse(comboBoxBuildsToRun.SelectedText);
         }
 
         public void LoadSettingsFromProject(Project project)
@@ -435,18 +436,24 @@ namespace TASM_IDE
             {
                 toolStripComboBoxBuild.SelectedIndex = 1;
             }
+
+            comboBoxBuildsToRun.SelectedIndex = 0;
+            if (project.BuildsToRun > 0)
+            {
+                comboBoxBuildsToRun.SelectedIndex = comboBoxBuildsToRun.FindStringExact(project.BuildsToRun.ToString());
+            }
         }
 
         private void toolStripButtonBuild_Click(object sender, EventArgs e)
         {
-            BuildCurrentProject();
+            BuildCurrentProject(String.Empty);
         }
 
-        private void BuildCurrentProject()
+        private void BuildCurrentProject(string forcedBuildName)
         {
             if (_currentProject != null)
             {
-                BuildProject(_currentProject, _currentProjectFilename);
+                BuildProject(_currentProject, _currentProjectFilename, forcedBuildName);
                 UpdateOBJDetails();
             }
             else
@@ -455,7 +462,7 @@ namespace TASM_IDE
             }
         }
 
-        private bool BuildProject(Project project, string projectFileName)
+        private bool BuildProject(Project project, string projectFileName, string forcedBuildName)
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -473,6 +480,7 @@ namespace TASM_IDE
 
             textBoxCompileOutputRaw.Text = "";
             _compilerOutputItems.Clear();
+            listViewLSTDetails.Items.Clear();
             objectListViewCompileFormatted.SetObjects(_compilerOutputItems);
 
             //Pre-Build Command
@@ -496,9 +504,12 @@ namespace TASM_IDE
                 }
             }
 
+            Dictionary<string, int> labelUsage = new Dictionary<string, int>();
+            Dictionary<string, List<string>> labelLocations = new Dictionary<string, List<string>>();
+
             foreach (ProjectFile file in project.Files)
             {
-                toolStripStatusLabel.Text = "Building " + file.Filename + "...";
+                toolStripStatusLabel.Text = forcedBuildName + "Building " + file.Filename + "...";
                 Application.DoEvents();
 
                 string arguments = BuildCommand(file);
@@ -556,12 +567,84 @@ namespace TASM_IDE
                 textBoxCompileOutputRaw.Text += fileOutput;
                 textBoxCompileOutputRaw.Text += "\r\n";
                 Application.DoEvents();
+
+                //check for the listing file...
+
+                StringBuilder lb = new StringBuilder();
+                lb.Append(textBoxLstDirectory.Text);
+                lb.Append("\\");
+                if (comboBoxLstNaming.SelectedIndex == 0)
+                {
+                    lb.Append(GetFileName(file, ".lst"));
+                }
+                else
+                {
+                    lb.Append(textBoxLstManualFilename);
+                }
+
+                string listFile = currentDirectory + lb.ToString().TrimStart(new char[] { '.' });
+                if (File.Exists(listFile))
+                {
+                    string[] lines = File.ReadAllLines(listFile);
+                    bool isTable = false;
+                    foreach(string line in lines)
+                    {
+                        if (!isTable)
+                        {
+                            if (line == "-----    ----    ------    ------------------------------")
+                            {
+                                isTable = true;
+                            }
+                        }
+                        else
+                        {
+                            if (line == "")
+                            {
+                                isTable = false;
+                                break;
+                            }
+                            string[] parts = line.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                            int numParts = parts.Length;
+                            string label = parts[numParts-1].ToLower();
+                            int usageCount = int.Parse(parts[numParts-2]);
+                            if (labelUsage.ContainsKey(label))
+                            {
+                                labelUsage[label] += usageCount;
+                            }
+                            else
+                            {
+                                labelUsage.Add(label, usageCount);
+                            }
+                            //locations
+                            if (labelLocations.ContainsKey(label))
+                            {
+                                labelLocations[label].Add(file.Filename);
+                            }
+                            else
+                            {
+                                labelLocations.Add(label, new List<string>() { file.Filename });
+                            }
+                        }
+                    }
+                }
+            }
+
+            toolStripLabelCount.Text = labelUsage.Count().ToString() + " labels generated";
+            foreach (KeyValuePair<string,int> kvp in labelUsage.OrderBy(v=>v.Value))
+            {
+                ListViewItem lvi = new ListViewItem(kvp.Key);
+                lvi.SubItems.Add(kvp.Value.ToString());
+                if (labelLocations.ContainsKey(kvp.Key))
+                {
+                    lvi.SubItems.Add(String.Join(",", labelLocations[kvp.Key].OrderBy(s => s).ToArray()));
+                }
+                listViewLSTDetails.Items.Add(lvi);
             }
 
             //Post-Build Command
             if (!String.IsNullOrEmpty(textBoxPostBuildCommand.Text))
             {
-                toolStripStatusLabel.Text = "Executing Post-Build...";
+                toolStripStatusLabel.Text = forcedBuildName + "Executing Post-Build...";
                 Application.DoEvents();
                 string postBuildCommand = Path.Combine(currentDirectory, textBoxPostBuildCommand.Text);
                 if (File.Exists(postBuildCommand))
@@ -859,7 +942,7 @@ namespace TASM_IDE
         {
             if (e.KeyCode == Keys.F6)
             {
-                BuildCurrentProject();
+                BuildCurrentProject(String.Empty);
             }
             else if (e.KeyCode == Keys.F5)
             {
@@ -935,10 +1018,15 @@ namespace TASM_IDE
         {
             if (_currentProject != null)
             {
-                BuildCurrentProject();
+                BuildCurrentProject(String.Empty);
 
                 if (_compilerOutputItems.Where(i => i.OutputType == CompileOutputType.Error).Count() == 0)
                 {
+                    for(int i = 1; i < _currentProject.BuildsToRun; i++)
+                    {
+                        //build each time...
+                        BuildCurrentProject("FORCED BUILD #" + i.ToString() + ": ");
+                    }
                     if (_currentProject != null)
                     {
                         if (_currentProject.ActiveBuild == Project.Build.Debug && !String.IsNullOrEmpty(_currentProject.RunDebugCommand))
@@ -1015,7 +1103,7 @@ namespace TASM_IDE
 
         private void buildToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BuildCurrentProject();
+            BuildCurrentProject(String.Empty);
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1200,13 +1288,29 @@ namespace TASM_IDE
                     {
                         decimal percentUsed = ((decimal)usedBytes) / ((decimal)fi.Length);
                         i.SubItems.Add(percentUsed.ToString("P"));
+                        i.SubItems.Add(GetChecksum(file));
                     }
-
 
                     listViewObjDetails.Items.Add(i);
 
                 }
             }
+        }
+
+        private string GetChecksum(string filename)
+        {
+            string csumString = "ERROR";
+            if (File.Exists(filename))
+            {
+                int csum = 0;
+                byte[] bytes = File.ReadAllBytes(filename);
+                foreach (byte b in bytes)
+                {
+                    csum += b;
+                }
+                csumString = (csum & 0xFFFF).ToString("X4");
+            }
+            return csumString;
         }
 
         private int GetUnusedBytes(string file)

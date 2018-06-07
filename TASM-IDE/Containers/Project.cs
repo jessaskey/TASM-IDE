@@ -27,6 +27,7 @@ namespace TASM_IDE.Containers
         public ObjectFileFormat ObjectFileFormat = ObjectFileFormat.IntelHex;
         public int ObjectFillValue = 0;
         public Build ActiveBuild = Build.Debug;
+        public int BuildsToRun = 1;
 
         public string PreBuildCommand { get; set; }
         public string PostBuildCommand { get; set; }
