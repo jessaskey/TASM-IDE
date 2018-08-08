@@ -360,7 +360,7 @@ namespace TASM_IDE
             project.ExportFileEnabled = checkBoxExpEnable.Checked;
             project.ListingFileEnabled = checkBoxLstEnable.Checked;
             project.SymbolFileEnabled = checkBoxSymEnable.Checked;
-            project.BuildsToRun = int.Parse(comboBoxBuildsToRun.SelectedText);
+            project.BuildsToRun = int.Parse(comboBoxBuildsToRun.SelectedItem.ToString());
         }
 
         public void LoadSettingsFromProject(Project project)
@@ -492,7 +492,7 @@ namespace TASM_IDE
                 if (File.Exists(preBuildCommand))
                 {
                     textBoxCompileOutputRaw.Text += "Executing Pre-Build Command: " + preBuildCommand + "\r\n";
-                    string preBuildOutput = Execute(Path.Combine(currentDirectory, preBuildCommand), "", "", currentDirectory, true);
+                    string preBuildOutput = Execute(Path.Combine(currentDirectory, preBuildCommand), "", "", currentDirectory, true, true);
                     textBoxCompileOutputRaw.Text += preBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                 }
                 else
@@ -516,7 +516,7 @@ namespace TASM_IDE
 
                 textBoxCompileOutputRaw.Text += ("Running: " + executable + " " + arguments + "\r\n");
 
-                string fileOutput = Execute(Path.Combine(currentDirectory, executable), file.Filename, arguments, currentDirectory, true);
+                string fileOutput = Execute(Path.Combine(currentDirectory, executable), file.Filename, arguments, currentDirectory, true, true);
                 string[] outputLines = fileOutput.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (string line in outputLines)
@@ -650,7 +650,7 @@ namespace TASM_IDE
                 if (File.Exists(postBuildCommand))
                 {
                     textBoxCompileOutputRaw.Text += "Executing Post-Build Command: " + postBuildCommand + "\r\n";
-                    string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", "", currentDirectory, true);
+                    string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", "", currentDirectory, true, true);
                     textBoxCompileOutputRaw.Text += postBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                 }
                 else
@@ -687,7 +687,7 @@ namespace TASM_IDE
             
         }
 
-        private string Execute(string executable, string targetfile, string arguments, string workingDirectory, bool hide)
+        private string Execute(string executable, string targetfile, string arguments, string workingDirectory, bool hide, bool wait)
         {
             Process p = new Process();
             // Redirect the output stream of the child process.
@@ -705,25 +705,31 @@ namespace TASM_IDE
                 p.StartInfo.CreateNoWindow = true;
             }
             p.Start();
-            // Do not wait for the child process to exit before
-            // reading to the end of its redirected stream.
-            // p.WaitForExit();
-            // Read the output stream first and then wait.
-            StringBuilder sb = new StringBuilder();
-            if (p.StandardOutput.BaseStream != null)
-            {
-                sb.AppendLine(p.StandardOutput.ReadToEnd());
-            }
-            if (p.StandardError.BaseStream != null)
-            {
-                sb.AppendLine(p.StandardError.ReadToEnd());
-            }
-            p.WaitForExit();
 
-            if (p.ExitCode < 0)
+            StringBuilder sb = new StringBuilder();
+
+            if (wait)
             {
-                sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
-                //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                // Do not wait for the child process to exit before
+                // reading to the end of its redirected stream.
+                // p.WaitForExit();
+                // Read the output stream first and then wait.
+                
+                if (p.StandardOutput.BaseStream != null)
+                {
+                    sb.AppendLine(p.StandardOutput.ReadToEnd());
+                }
+                if (p.StandardError.BaseStream != null)
+                {
+                    sb.AppendLine(p.StandardError.ReadToEnd());
+                }
+                p.WaitForExit();
+
+                if (p.ExitCode < 0)
+                {
+                    sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
+                    //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                }
             }
 
             return sb.ToString();
@@ -1032,13 +1038,13 @@ namespace TASM_IDE
                         if (_currentProject.ActiveBuild == Project.Build.Debug && !String.IsNullOrEmpty(_currentProject.RunDebugCommand))
                         {
                             string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
-                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunDebugCommand), "", "", currentDirectory, false);
+                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunDebugCommand), "", "", currentDirectory, false, false);
                             textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                         }
                         else if(_currentProject.ActiveBuild == Project.Build.Release && !String.IsNullOrEmpty(_currentProject.RunCommand))
                         {
                             string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
-                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunCommand), "", "", currentDirectory, false);
+                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunCommand), "", "", currentDirectory, false, false);
                             textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                         }
                     }
