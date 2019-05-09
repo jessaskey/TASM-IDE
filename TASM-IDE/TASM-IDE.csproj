@@ -27,8 +27,8 @@
     <UpdateUrl>https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/</UpdateUrl>
     <PublisherName>TASM-IDE</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>default.aspx</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <WebPage>default.html</WebPage>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
