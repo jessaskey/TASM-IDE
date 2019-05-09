@@ -31,7 +31,6 @@ namespace TASM_IDE
             ResetSettingsToDefault();
             olvCompileItemColumnImage.ImageGetter = CompileItemImageGetter;
             LoadRecentFiles();
-
             toolStripComboBoxBuild.SelectedIndex = 0;
         }
 
@@ -182,7 +181,7 @@ namespace TASM_IDE
                 _currentProjectFilename = currentProjectFilename;
                 file.Close();  
 
-                this.Text = "TASM-IDE - " + Path.GetFileName(currentProjectFilename);
+                this.Text = "TASM-IDE - " + currentProjectFilename;
                 LoadSettingsFromProject(_currentProject);
                 AddRecentfile(currentProjectFilename);
                 _currentProject.IsDirty = false;
@@ -689,47 +688,49 @@ namespace TASM_IDE
 
         private string Execute(string executable, string targetfile, string arguments, string workingDirectory, bool hide, bool wait)
         {
-            Process p = new Process();
+            ProcessStartInfo si = new ProcessStartInfo();
             // Redirect the output stream of the child process.
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.FileName = executable;
-            p.StartInfo.Arguments = arguments;
+            si.UseShellExecute = false;
+            si.RedirectStandardOutput = true;
+            si.RedirectStandardError = true;
+            si.FileName = executable;
+            si.Arguments = arguments;
             if (!String.IsNullOrEmpty(workingDirectory))
             {
-                p.StartInfo.WorkingDirectory = workingDirectory;
+                si.WorkingDirectory = workingDirectory;
             }
-            p.StartInfo.RedirectStandardError = true;
             if (hide)
             {
-                p.StartInfo.CreateNoWindow = true;
+                si.CreateNoWindow = true;
             }
-            p.Start();
 
             StringBuilder sb = new StringBuilder();
 
-            if (wait)
+            using (Process p = Process.Start(si))
             {
-                // Do not wait for the child process to exit before
-                // reading to the end of its redirected stream.
-                // p.WaitForExit();
-                // Read the output stream first and then wait.
-                
-                if (p.StandardOutput.BaseStream != null)
+                if (wait)
                 {
-                    sb.AppendLine(p.StandardOutput.ReadToEnd());
-                }
-                if (p.StandardError.BaseStream != null)
-                {
-                    sb.AppendLine(p.StandardError.ReadToEnd());
-                }
-                p.WaitForExit();
 
-                if (p.ExitCode < 0)
-                {
-                    sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
-                    //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                    p.WaitForExit();
+
+                    using (StreamReader reader = p.StandardOutput)
+                    {
+                        sb.AppendLine(reader.ReadToEnd());
+                    }
+
+                    using (StreamReader reader = p.StandardError)
+                    {
+                        sb.AppendLine(reader.ReadToEnd());
+                    }
+
+                    if (p.ExitCode < 0)
+                    {
+                        sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
+                        //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                    }
                 }
+
+
             }
 
             return sb.ToString();
@@ -1140,7 +1141,12 @@ namespace TASM_IDE
             string[] files = Properties.Settings.Default.RecentFileList.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string file in files)
             {
-                ToolStripMenuItem item = new ToolStripMenuItem(file);
+                string fileName = file;
+                if (!File.Exists(fileName))
+                {
+                    fileName = file + "(Not Found)";
+                }
+                ToolStripMenuItem item = new ToolStripMenuItem(fileName);
                 item.Click += recentItem_Click;
                 recentProjectsToolStripMenuItem.DropDownItems.Add(item);
             }
@@ -1210,11 +1216,41 @@ namespace TASM_IDE
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            string passedFilename = "";
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                passedFilename = args[0];
+            }
+            else
+            {
+                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                {
+                    if (AppDomain.CurrentDomain != null)
+                    {
+                        if (AppDomain.CurrentDomain.SetupInformation != null)
+                        {
+                            if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments != null)
+                            {
+                                if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null)
+                                {
+                                    if (AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
+                                    {
+                                        Uri uri = new Uri(AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData[0]);
+                                        passedFilename = uri.LocalPath.ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             //check for passed args
-            if (OpenArgs != null)
+            if (passedFilename != null)
             {
                 //MessageBox.Show(arg, "Open");
-                if (File.Exists(OpenArgs))
+                if (File.Exists(passedFilename))
                 {
                     //MessageBox.Show(arg, "Exists");
                     if (OpenArgs.ToLower().EndsWith(".tasmp"))
