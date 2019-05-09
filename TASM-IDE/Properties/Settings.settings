@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TASM_IDE.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DefaultEditor" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\Program Files (x86)\Notepad++\notepad++.exe</Value>
-    </Setting>
     <Setting Name="RecentFileList" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultEditor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Notepad++\notepad++.exe</Value>
     </Setting>
   </Settings>
 </SettingsFile>

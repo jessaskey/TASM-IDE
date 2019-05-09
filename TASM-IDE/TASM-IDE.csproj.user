@@ -4,7 +4,7 @@
     <PublishUrlHistory>.\publish\|C:\SVN\git\tasm-ide\trunk\TASM-IDE\publish\|publi\|https://raw.githubusercontent.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/|https://raw.githubusercontent.com/jessaskey/[repo_name]/[branch]/[solution_name]/[project_name]/publish/</PublishUrlHistory>
     <InstallUrlHistory>https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/|https://rawgit.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/setup.exe/|https://cdn.rawgit.com/jessaskey/TASM-IDE/aa6d0f55/TASM-IDE/publish/|https://raw.githubusercontent.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/</InstallUrlHistory>
     <SupportUrlHistory />
-    <UpdateUrlHistory />
+    <UpdateUrlHistory>https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
