@@ -31,7 +31,6 @@ namespace TASM_IDE
             ResetSettingsToDefault();
             olvCompileItemColumnImage.ImageGetter = CompileItemImageGetter;
             LoadRecentFiles();
-            toolStripComboBoxBuild.SelectedIndex = 0;
         }
 
         public object CompileItemImageGetter(object rowObject) {
@@ -181,11 +180,58 @@ namespace TASM_IDE
                 _currentProjectFilename = currentProjectFilename;
                 file.Close();  
 
+                //do some fixes here for conversion
+                if (_currentProject.Configurations.Count == 0)
+                {
+                    //if there are no configurations, we need to have at least two
+                    Configuration configurationDebug = new Configuration();
+                    configurationDebug.Id = Guid.NewGuid();
+                    configurationDebug.Name = "Debug";
+                    if (!String.IsNullOrWhiteSpace(_currentProject.RunDebugCommand))
+                    {
+                        configurationDebug.RunCommand = _currentProject.RunDebugCommand;
+                    }
+                    _currentProject.Configurations.Add(configurationDebug);
+
+                    Configuration configurationRelease = new Configuration();
+                    configurationRelease.Id = Guid.NewGuid();
+                    configurationRelease.Name = "Release";
+                    if (!String.IsNullOrWhiteSpace(_currentProject.RunCommand))
+                    {
+                        configurationRelease.RunCommand = _currentProject.RunCommand;
+                    }
+                    _currentProject.Configurations.Add(configurationRelease);
+
+                    _currentProject.ActiveConfiguration = configurationDebug.Id;
+                }
+
                 this.Text = "TASM-IDE - " + currentProjectFilename;
                 LoadSettingsFromProject(_currentProject);
+                LoadConfigurationsFromProject(_currentProject);
                 AddRecentfile(currentProjectFilename);
                 _currentProject.IsDirty = false;
             }
+        }
+
+        private void LoadConfigurationsFromProject(Project project)
+        {
+            object oldValue = toolStripComboBoxBuild.ComboBox.SelectedValue;
+            toolStripComboBoxBuild.ComboBox.BindingContext = this.BindingContext;
+            toolStripComboBoxBuild.ComboBox.DisplayMember = "Name";
+            toolStripComboBoxBuild.ComboBox.ValueMember = "Id";
+            toolStripComboBoxBuild.ComboBox.DataSource = project.Configurations;
+
+            if (oldValue != null)
+            {
+                toolStripComboBoxBuild.ComboBox.SelectedValue = oldValue;
+            }
+            else if (project.ActiveConfiguration != Guid.Empty)
+            {
+                toolStripComboBoxBuild.ComboBox.SelectedValue = project.ActiveConfiguration;
+            }
+
+            //update the UI list
+            objectListViewConfigurations.SetObjects(_currentProject.Configurations);
         }
 
         private void toolStripButtonOpen_Click(object sender, EventArgs e)
@@ -237,7 +283,6 @@ namespace TASM_IDE
             textBoxCompilerTableParameter.Text = "-65";
             textBoxPreBuildCommand.Text = "";
             textBoxPostBuildCommand.Text = "";
-            textBoxRunDebugCommand.Text = "";
             checkBoxTimer.Checked = true;
             numericUpDownObjFill.Value = 0;
 
@@ -352,8 +397,8 @@ namespace TASM_IDE
             project.IgnoreCaseInLabels = checkBoxIgnoreCase.Checked;
             project.PreBuildCommand = textBoxPreBuildCommand.Text;
             project.PostBuildCommand = textBoxPostBuildCommand.Text;
-            project.RunCommand = textBoxRunReleaseCommand.Text;
-            project.RunDebugCommand = textBoxRunDebugCommand.Text;
+            //project.RunCommand = textBoxRunReleaseCommand.Text;
+            //project.RunDebugCommand = textBoxRunDebugCommand.Text;
             project.ObjectFillValue = (int)numericUpDownObjFill.Value;
 
             project.ExportFileEnabled = checkBoxExpEnable.Checked;
@@ -416,8 +461,8 @@ namespace TASM_IDE
             textBoxCompilerTableParameter.Text = project.TableParameter;
             textBoxPreBuildCommand.Text = project.PreBuildCommand;
             textBoxPostBuildCommand.Text = project.PostBuildCommand;
-            textBoxRunReleaseCommand.Text = project.RunCommand;
-            textBoxRunDebugCommand.Text = project.RunDebugCommand;
+            //textBoxRunReleaseCommand.Text = project.RunCommand;
+            //textBoxRunDebugCommand.Text = project.RunDebugCommand;
             checkBoxTimer.Checked = project.TimeAssembly;
             checkBoxExpandSource.Checked = project.ExpandSourceInListing;
             checkBoxIgnoreCase.Checked = project.IgnoreCaseInLabels;
@@ -426,15 +471,6 @@ namespace TASM_IDE
             checkBoxExpEnable.Checked = project.ExportFileEnabled;
             checkBoxLstEnable.Checked = project.ListingFileEnabled;
             checkBoxSymEnable.Checked = project.SymbolFileEnabled;
-
-            if (project.ActiveBuild == Project.Build.Debug)
-            {
-                toolStripComboBoxBuild.SelectedIndex = 0;
-            }
-            else
-            {
-                toolStripComboBoxBuild.SelectedIndex = 1;
-            }
 
             comboBoxBuildsToRun.SelectedIndex = 0;
             if (project.BuildsToRun > 0)
@@ -651,13 +687,6 @@ namespace TASM_IDE
                     textBoxCompileOutputRaw.Text += "Executing Post-Build Command: " + postBuildCommand + "\r\n";
                     string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", "", currentDirectory, true, true);
                     textBoxCompileOutputRaw.Text += postBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
-                }
-                else
-                {
-                    CompileOutputItem postBuildErrorItem = new CompileOutputItem();
-                    postBuildErrorItem.Description = "Post-Build Command '" + postBuildCommand + "', does not exist.";
-                    postBuildErrorItem.OutputType = CompileOutputType.Error;
-                    _compilerOutputItems.Add(postBuildErrorItem);
                 }
             }
 
@@ -1036,17 +1065,20 @@ namespace TASM_IDE
                     }
                     if (_currentProject != null)
                     {
-                        if (_currentProject.ActiveBuild == Project.Build.Debug && !String.IsNullOrEmpty(_currentProject.RunDebugCommand))
+                        Configuration currentConfiguration = _currentProject.Configurations.Where(c => c.Id == _currentProject.ActiveConfiguration).FirstOrDefault();
+                        if (currentConfiguration != null)
                         {
                             string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
-                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunDebugCommand), "", "", currentDirectory, false, false);
-                            textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
-                        }
-                        else if(_currentProject.ActiveBuild == Project.Build.Release && !String.IsNullOrEmpty(_currentProject.RunCommand))
-                        {
-                            string currentDirectory = Path.GetDirectoryName(_currentProjectFilename);
-                            string runCommandOutput = Execute(Path.Combine(currentDirectory, _currentProject.RunCommand), "", "", currentDirectory, false, false);
-                            textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                            string runCommand = Path.Combine(currentDirectory, currentConfiguration.RunCommand);
+                            if (File.Exists(runCommand))
+                            {
+                                string runCommandOutput = Execute(runCommand, "", "", currentDirectory, false, false);
+                                textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                            }
+                            else
+                            {
+                                MessageBox.Show("The Configuration Run command was not found: '" + runCommand + "'", "Run Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
                         }
                     }
                 }
@@ -1293,13 +1325,9 @@ namespace TASM_IDE
         {
             if (_currentProject != null)
             {
-                if (toolStripComboBoxBuild.SelectedIndex == 0)
+                if (toolStripComboBoxBuild.ComboBox.SelectedValue != null)
                 {
-                    _currentProject.ActiveBuild = Project.Build.Debug;
-                }
-                else
-                {
-                    _currentProject.ActiveBuild = Project.Build.Release;
+                    _currentProject.ActiveConfiguration = (Guid)toolStripComboBoxBuild.ComboBox.SelectedValue;
                 }
             }
         }
@@ -1373,6 +1401,59 @@ namespace TASM_IDE
             }
 
             return unusedBytes;
+        }
+
+        private void ObjectListViewConfigurations_DoubleClick(object sender, EventArgs e)
+        {
+            if (objectListViewFiles.SelectedItem != null)
+            {
+                Configuration configuration = objectListViewFiles.SelectedItem.RowObject as Configuration;
+                if (configuration != null)
+                {
+                    Dialogs.ConfigurationEditor ed = new Dialogs.ConfigurationEditor();
+                    ed.Name = configuration.Name;
+                    ed.RunCommand = configuration.RunCommand;
+                    DialogResult dr = ed.ShowDialog();
+                    if (dr == System.Windows.Forms.DialogResult.OK)
+                    {
+                        configuration.Name = ed.Name;
+                        configuration.RunCommand = ed.RunCommand;
+                        LoadConfigurationsFromProject(_currentProject);
+                    }
+                }
+            }
+        }
+
+        private void ToolStripButtonNewConfiguration_Click(object sender, EventArgs e)
+        {
+            Dialogs.ConfigurationEditor ed = new Dialogs.ConfigurationEditor();
+            DialogResult dr = ed.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                Configuration configuration = new Configuration();
+                configuration.Id = Guid.NewGuid();
+                configuration.Name = ed.Name;
+                configuration.RunCommand = ed.RunCommand;
+                _currentProject.Configurations.Add(configuration);
+                LoadConfigurationsFromProject(_currentProject);
+                _currentProject.IsDirty = true;
+            }
+        }
+
+        private void ToolStripButtonDeleteConfiguration_Click(object sender, EventArgs e)
+        {
+            if (_currentProject != null && File.Exists(_currentProjectFilename))
+            {
+                if (objectListViewConfigurations.SelectedItem != null)
+                {
+                    int currentIndex = objectListViewConfigurations.SelectedIndex;
+
+                    Configuration p = objectListViewConfigurations.SelectedItem.RowObject as Configuration;
+                    _currentProject.Configurations.Remove(p);
+                    objectListViewConfigurations.SetObjects(_currentProject.Configurations);
+                    _currentProject.IsDirty = true;
+                }
+            }
         }
     }
 }

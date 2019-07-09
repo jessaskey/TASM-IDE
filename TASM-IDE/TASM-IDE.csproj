@@ -28,7 +28,7 @@
     <PublisherName>TASM-IDE</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>default.html</WebPage>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Containers\CompileOutputItem.cs" />
+    <Compile Include="Containers\Configuration.cs" />
     <Compile Include="Containers\FileOptions.cs" />
     <Compile Include="Containers\Project.cs" />
     <Compile Include="Containers\ProjectFile.cs" />
@@ -100,6 +101,12 @@
     </Compile>
     <Compile Include="Dialogs\ProgramSettings.Designer.cs">
       <DependentUpon>ProgramSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ConfigurationEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConfigurationEditor.Designer.cs">
+      <DependentUpon>ConfigurationEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ProjectFileEditor.cs">
       <SubType>Form</SubType>
@@ -118,6 +125,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Dialogs\ProgramSettings.resx">
       <DependentUpon>ProgramSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConfigurationEditor.resx">
+      <DependentUpon>ConfigurationEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ProjectFileEditor.resx">
       <DependentUpon>ProjectFileEditor.cs</DependentUpon>
