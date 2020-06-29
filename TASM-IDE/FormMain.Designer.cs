@@ -98,6 +98,7 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripConfigurations = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNewConfiguration = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDeleteConfiguration = new System.Windows.Forms.ToolStripButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControlCompileOutput = new System.Windows.Forms.TabControl();
             this.tabPageCompileOutputFormatted = new System.Windows.Forms.TabPage();
@@ -151,7 +152,6 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonDeleteConfiguration = new System.Windows.Forms.ToolStripButton();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewFiles)).BeginInit();
@@ -217,6 +217,7 @@
             this.objectListViewFiles.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListViewFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListViewFiles.FullRowSelect = true;
+            this.objectListViewFiles.HideSelection = false;
             this.objectListViewFiles.Location = new System.Drawing.Point(3, 30);
             this.objectListViewFiles.Name = "objectListViewFiles";
             this.objectListViewFiles.ShowGroups = false;
@@ -879,6 +880,7 @@
             this.objectListViewConfigurations.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListViewConfigurations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListViewConfigurations.FullRowSelect = true;
+            this.objectListViewConfigurations.HideSelection = false;
             this.objectListViewConfigurations.Location = new System.Drawing.Point(3, 28);
             this.objectListViewConfigurations.Name = "objectListViewConfigurations";
             this.objectListViewConfigurations.ShowGroups = false;
@@ -920,6 +922,16 @@
             this.toolStripButtonNewConfiguration.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonNewConfiguration.Text = "New";
             this.toolStripButtonNewConfiguration.Click += new System.EventHandler(this.ToolStripButtonNewConfiguration_Click);
+            // 
+            // toolStripButtonDeleteConfiguration
+            // 
+            this.toolStripButtonDeleteConfiguration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDeleteConfiguration.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDeleteConfiguration.Image")));
+            this.toolStripButtonDeleteConfiguration.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDeleteConfiguration.Name = "toolStripButtonDeleteConfiguration";
+            this.toolStripButtonDeleteConfiguration.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDeleteConfiguration.Text = "Delete";
+            this.toolStripButtonDeleteConfiguration.Click += new System.EventHandler(this.ToolStripButtonDeleteConfiguration_Click);
             // 
             // tabPage3
             // 
@@ -1067,6 +1079,7 @@
             this.columnHeader4,
             this.columnHeader5});
             this.listViewObjDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewObjDetails.HideSelection = false;
             this.listViewObjDetails.Location = new System.Drawing.Point(0, 0);
             this.listViewObjDetails.Margin = new System.Windows.Forms.Padding(2);
             this.listViewObjDetails.Name = "listViewObjDetails";
@@ -1107,7 +1120,7 @@
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(575, 449);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "LST Details";
+            this.tabPage5.Text = "SYM Details";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // listViewLSTDetails
@@ -1117,6 +1130,7 @@
             this.columnHeader7,
             this.columnHeader11});
             this.listViewLSTDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewLSTDetails.HideSelection = false;
             this.listViewLSTDetails.Location = new System.Drawing.Point(0, 25);
             this.listViewLSTDetails.Margin = new System.Windows.Forms.Padding(2);
             this.listViewLSTDetails.Name = "listViewLSTDetails";
@@ -1365,7 +1379,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // settingsToolStripMenuItem
@@ -1389,16 +1403,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // toolStripButtonDeleteConfiguration
-            // 
-            this.toolStripButtonDeleteConfiguration.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDeleteConfiguration.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDeleteConfiguration.Image")));
-            this.toolStripButtonDeleteConfiguration.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDeleteConfiguration.Name = "toolStripButtonDeleteConfiguration";
-            this.toolStripButtonDeleteConfiguration.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonDeleteConfiguration.Text = "Delete";
-            this.toolStripButtonDeleteConfiguration.Click += new System.EventHandler(this.ToolStripButtonDeleteConfiguration_Click);
             // 
             // FormMain
             // 

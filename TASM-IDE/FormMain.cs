@@ -669,7 +669,7 @@ namespace TASM_IDE
             {
                 ListViewItem lvi = new ListViewItem(kvp.Key);
                 lvi.SubItems.Add(kvp.Value.ToString());
-                if (labelLocations.ContainsKey(kvp.Key))
+                if (labelLocations.ContainsKey(kvp.Key) && kvp.Value > 0)
                 {
                     lvi.SubItems.Add(String.Join(",", labelLocations[kvp.Key].OrderBy(s => s).ToArray()));
                 }

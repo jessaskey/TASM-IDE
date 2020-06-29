@@ -26,6 +26,7 @@ namespace TASM_IDE
     {
         Files,
         Options,
+        Configuration,
         Output
     }
 
