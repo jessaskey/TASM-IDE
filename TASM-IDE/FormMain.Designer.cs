@@ -410,6 +410,7 @@
             "3",
             "4",
             "5"});
+            this.comboBoxBuildsToRun.SelectedIndex = 0;
             this.comboBoxBuildsToRun.Location = new System.Drawing.Point(88, 132);
             this.comboBoxBuildsToRun.Name = "comboBoxBuildsToRun";
             this.comboBoxBuildsToRun.Size = new System.Drawing.Size(180, 21);

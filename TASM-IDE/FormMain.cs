@@ -279,7 +279,7 @@ namespace TASM_IDE
             textBoxObjManualFilename.Text = "";
             textBoxSymManualFilename.Text = "";
 
-            textBoxTASMExecutable.Text = "tasm.exe";
+            textBoxTASMExecutable.Text = "tasmx.exe";
             textBoxCompilerTableParameter.Text = "-65";
             textBoxPreBuildCommand.Text = "";
             textBoxPostBuildCommand.Text = "";
@@ -506,6 +506,7 @@ namespace TASM_IDE
 
             string executable = project.Executable;
             string currentDirectory = Path.GetDirectoryName(projectFileName);
+            string fullPathExecutable = Path.Combine(currentDirectory, executable);
 
             //make sure any output directories exist
             EnsureDirectoryExists(currentDirectory, textBoxExpDirectory.Text);
@@ -518,179 +519,187 @@ namespace TASM_IDE
             listViewLSTDetails.Items.Clear();
             objectListViewCompileFormatted.SetObjects(_compilerOutputItems);
 
-            //Pre-Build Command
-            if (!String.IsNullOrEmpty(textBoxPreBuildCommand.Text))
+            //test for executable exists first
+            if (!File.Exists(fullPathExecutable))
             {
-                toolStripStatusLabel.Text = "Executing Pre-Build...";
-                Application.DoEvents();
-                string preBuildCommand = Path.Combine(currentDirectory, textBoxPreBuildCommand.Text);
-                if (File.Exists(preBuildCommand))
-                {
-                    textBoxCompileOutputRaw.Text += "Executing Pre-Build Command: " + preBuildCommand + "\r\n";
-                    string preBuildOutput = Execute(Path.Combine(currentDirectory, preBuildCommand), "", "", currentDirectory, true, true);
-                    textBoxCompileOutputRaw.Text += preBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
-                }
-                else
-                {
-                    CompileOutputItem preBuildErrorItem = new CompileOutputItem();
-                    preBuildErrorItem.Description = "Pre-Build Command '" + preBuildCommand + "', does not exist.";
-                    preBuildErrorItem.OutputType = CompileOutputType.Error;
-                    _compilerOutputItems.Add(preBuildErrorItem);
-                }
+                _compilerOutputItems.Add(new CompileOutputItem() { OutputType = CompileOutputType.Error, FileName = executable, Description = "compiler executable was not found.", LineNumber = 0 });
             }
-
-            Dictionary<string, int> labelUsage = new Dictionary<string, int>();
-            Dictionary<string, List<string>> labelLocations = new Dictionary<string, List<string>>();
-
-            foreach (ProjectFile file in project.Files)
+            else
             {
-                toolStripStatusLabel.Text = forcedBuildName + "Building " + file.Filename + "...";
-                Application.DoEvents();
-
-                string arguments = BuildCommand(file);
-
-                textBoxCompileOutputRaw.Text += ("Running: " + executable + " " + arguments + "\r\n");
-
-                string fileOutput = Execute(Path.Combine(currentDirectory, executable), file.Filename, arguments, currentDirectory, true, true);
-                string[] outputLines = fileOutput.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (string line in outputLines)
+                //Pre-Build Command
+                if (!String.IsNullOrEmpty(textBoxPreBuildCommand.Text))
                 {
-                    if (line.StartsWith("ERROR"))
+                    toolStripStatusLabel.Text = "Executing Pre-Build...";
+                    Application.DoEvents();
+                    string preBuildCommand = Path.Combine(currentDirectory, textBoxPreBuildCommand.Text);
+                    if (File.Exists(preBuildCommand))
                     {
-                        CompileOutputItem i = new CompileOutputItem();
-                        //ERROR: mh_alpha.asm line 0028: tasm: source file open error on ./exp/auxpgm_4.exp
-                        string fileRegex = @"ERROR:\s(\S+)\s";
-                        Match fileMatch = Regex.Match(line, fileRegex);
-                        if (fileMatch.Groups.Count > 1 && fileMatch.Groups[1].Success)
-                        {
-                            i.FileName = fileMatch.Groups[1].Value.TrimStart(new char[] { '.', '/' });
-                        }
-
-                        string lineRegex = @"line ([0-9]+):";
-                        Match lineMatch = Regex.Match(line, lineRegex);
-                        if (lineMatch.Success)
-                        {
-                            string lineString = lineMatch.Groups[1].Value;
-                            i.LineNumber = int.Parse(lineString);
-                        }
-
-                        string descRegex = @"tasm:\s(.+)$";
-                        Match descMatch = Regex.Match(line, descRegex);
-                        if (descMatch.Success)
-                        {
-                            i.Description = descMatch.Groups[1].Value;
-                        }
-                        else
-                        {
-                            //"ERROR: ./tw_main.asm line 0528: Label not found: (mgamov)"
-                            string altDescRegex = i.LineNumber.ToString("0000") + @":\s(.+)$";
-                            Match altDescMatch = Regex.Match(line, altDescRegex);
-                            if (altDescMatch.Success)
-                            {
-                                i.Description = altDescMatch.Groups[1].Value;
-                            }
-                        }
-
-                        i.OutputType = CompileOutputType.Error;
-
-                        _compilerOutputItems.Add(i);
+                        textBoxCompileOutputRaw.Text += "Executing Pre-Build Command: " + preBuildCommand + "\r\n";
+                        string preBuildOutput = Execute(Path.Combine(currentDirectory, preBuildCommand), "", "", currentDirectory, true, true);
+                        textBoxCompileOutputRaw.Text += preBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                    }
+                    else
+                    {
+                        CompileOutputItem preBuildErrorItem = new CompileOutputItem();
+                        preBuildErrorItem.Description = "Pre-Build Command '" + preBuildCommand + "', does not exist.";
+                        preBuildErrorItem.OutputType = CompileOutputType.Error;
+                        _compilerOutputItems.Add(preBuildErrorItem);
                     }
                 }
 
-                objectListViewCompileFormatted.SetObjects(_compilerOutputItems);
-                textBoxCompileOutputRaw.Text += fileOutput;
-                textBoxCompileOutputRaw.Text += "\r\n";
-                Application.DoEvents();
+                Dictionary<string, int> labelUsage = new Dictionary<string, int>();
+                Dictionary<string, List<string>> labelLocations = new Dictionary<string, List<string>>();
 
-                //check for the listing file...
+                foreach (ProjectFile file in project.Files)
+                {
+                    toolStripStatusLabel.Text = forcedBuildName + "Building " + file.Filename + "...";
+                    Application.DoEvents();
 
-                StringBuilder lb = new StringBuilder();
-                lb.Append(textBoxLstDirectory.Text);
-                lb.Append("\\");
-                if (comboBoxLstNaming.SelectedIndex == 0)
-                {
-                    lb.Append(GetFileName(file, ".lst"));
-                }
-                else
-                {
-                    lb.Append(textBoxLstManualFilename);
-                }
+                    string arguments = BuildCommand(file);
+                    textBoxCompileOutputRaw.Text += ("Running: " + executable + " " + arguments + "\r\n");
 
-                string listFile = currentDirectory + lb.ToString().TrimStart(new char[] { '.' });
-                if (File.Exists(listFile))
-                {
-                    string[] lines = File.ReadAllLines(listFile);
-                    bool isTable = false;
-                    foreach(string line in lines)
+                    string fileOutput = Execute(fullPathExecutable, file.Filename, arguments, currentDirectory, true, true);
+                    string[] outputLines = fileOutput.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (string line in outputLines)
                     {
-                        if (!isTable)
+                        if (line.StartsWith("ERROR"))
                         {
-                            if (line == "-----    ----    ------    ------------------------------")
+                            CompileOutputItem i = new CompileOutputItem();
+                            //ERROR: mh_alpha.asm line 0028: tasm: source file open error on ./exp/auxpgm_4.exp
+                            string fileRegex = @"ERROR:\s(\S+)\s";
+                            Match fileMatch = Regex.Match(line, fileRegex);
+                            if (fileMatch.Groups.Count > 1 && fileMatch.Groups[1].Success)
                             {
-                                isTable = true;
+                                i.FileName = fileMatch.Groups[1].Value.TrimStart(new char[] { '.', '/' });
                             }
+
+                            string lineRegex = @"line ([0-9]+):";
+                            Match lineMatch = Regex.Match(line, lineRegex);
+                            if (lineMatch.Success)
+                            {
+                                string lineString = lineMatch.Groups[1].Value;
+                                i.LineNumber = int.Parse(lineString);
+                            }
+
+                            string descRegex = @"tasm:\s(.+)$";
+                            Match descMatch = Regex.Match(line, descRegex);
+                            if (descMatch.Success)
+                            {
+                                i.Description = descMatch.Groups[1].Value;
+                            }
+                            else
+                            {
+                                //"ERROR: ./tw_main.asm line 0528: Label not found: (mgamov)"
+                                string altDescRegex = i.LineNumber.ToString("0000") + @":\s(.+)$";
+                                Match altDescMatch = Regex.Match(line, altDescRegex);
+                                if (altDescMatch.Success)
+                                {
+                                    i.Description = altDescMatch.Groups[1].Value;
+                                }
+                            }
+
+                            i.OutputType = CompileOutputType.Error;
+
+                            _compilerOutputItems.Add(i);
                         }
-                        else
+                    }
+
+                    objectListViewCompileFormatted.SetObjects(_compilerOutputItems);
+                    textBoxCompileOutputRaw.Text += fileOutput;
+                    textBoxCompileOutputRaw.Text += "\r\n";
+                    Application.DoEvents();
+
+                    //check for the listing file...
+
+                    StringBuilder lb = new StringBuilder();
+                    lb.Append(textBoxLstDirectory.Text);
+                    lb.Append("\\");
+                    if (comboBoxLstNaming.SelectedIndex == 0)
+                    {
+                        lb.Append(GetFileName(file, ".lst"));
+                    }
+                    else
+                    {
+                        lb.Append(textBoxLstManualFilename);
+                    }
+
+                    string listFile = currentDirectory + lb.ToString().TrimStart(new char[] { '.' });
+                    if (File.Exists(listFile))
+                    {
+                        string[] lines = File.ReadAllLines(listFile);
+                        bool isTable = false;
+                        foreach (string line in lines)
                         {
-                            if (line == "")
+                            if (!isTable)
                             {
-                                isTable = false;
-                                break;
-                            }
-                            string[] parts = line.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
-                            int numParts = parts.Length;
-                            string label = parts[numParts-1].ToLower();
-                            int usageCount = int.Parse(parts[numParts-2]);
-                            if (labelUsage.ContainsKey(label))
-                            {
-                                labelUsage[label] += usageCount;
+                                if (line == "-----    ----    ------    ------------------------------")
+                                {
+                                    isTable = true;
+                                }
                             }
                             else
                             {
-                                labelUsage.Add(label, usageCount);
-                            }
-                            //locations
-                            if (labelLocations.ContainsKey(label))
-                            {
-                                labelLocations[label].Add(file.Filename);
-                            }
-                            else
-                            {
-                                labelLocations.Add(label, new List<string>() { file.Filename });
+                                if (line == "")
+                                {
+                                    isTable = false;
+                                    break;
+                                }
+                                string[] parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                int numParts = parts.Length;
+                                string label = parts[numParts - 1].ToLower();
+                                int usageCount = int.Parse(parts[numParts - 2]);
+                                if (labelUsage.ContainsKey(label))
+                                {
+                                    labelUsage[label] += usageCount;
+                                }
+                                else
+                                {
+                                    labelUsage.Add(label, usageCount);
+                                }
+                                //locations
+                                if (labelLocations.ContainsKey(label))
+                                {
+                                    labelLocations[label].Add(file.Filename);
+                                }
+                                else
+                                {
+                                    labelLocations.Add(label, new List<string>() { file.Filename });
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            toolStripLabelCount.Text = labelUsage.Count().ToString() + " labels generated";
-            foreach (KeyValuePair<string,int> kvp in labelUsage.OrderBy(v=>v.Value))
-            {
-                ListViewItem lvi = new ListViewItem(kvp.Key);
-                lvi.SubItems.Add(kvp.Value.ToString());
-                if (labelLocations.ContainsKey(kvp.Key) && kvp.Value > 0)
+                toolStripLabelCount.Text = labelUsage.Count().ToString() + " labels generated";
+                foreach (KeyValuePair<string, int> kvp in labelUsage.OrderBy(v => v.Value))
                 {
-                    lvi.SubItems.Add(String.Join(",", labelLocations[kvp.Key].OrderBy(s => s).ToArray()));
+                    ListViewItem lvi = new ListViewItem(kvp.Key);
+                    lvi.SubItems.Add(kvp.Value.ToString());
+                    if (labelLocations.ContainsKey(kvp.Key) && kvp.Value > 0)
+                    {
+                        lvi.SubItems.Add(String.Join(",", labelLocations[kvp.Key].OrderBy(s => s).ToArray()));
+                    }
+                    listViewLSTDetails.Items.Add(lvi);
                 }
-                listViewLSTDetails.Items.Add(lvi);
-            }
 
-            //Post-Build Command
-            if (!String.IsNullOrEmpty(textBoxPostBuildCommand.Text))
-            {
-                toolStripStatusLabel.Text = forcedBuildName + "Executing Post-Build...";
-                Application.DoEvents();
-                string postBuildCommand = Path.Combine(currentDirectory, textBoxPostBuildCommand.Text);
-                if (File.Exists(postBuildCommand))
+                //Post-Build Command
+                if (!String.IsNullOrEmpty(textBoxPostBuildCommand.Text))
                 {
-                    textBoxCompileOutputRaw.Text += "Executing Post-Build Command: " + postBuildCommand + "\r\n";
-                    string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", "", currentDirectory, true, true);
-                    textBoxCompileOutputRaw.Text += postBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                    toolStripStatusLabel.Text = forcedBuildName + "Executing Post-Build...";
+                    Application.DoEvents();
+                    string postBuildCommand = Path.Combine(currentDirectory, textBoxPostBuildCommand.Text);
+                    if (File.Exists(postBuildCommand))
+                    {
+                        textBoxCompileOutputRaw.Text += "Executing Post-Build Command: " + postBuildCommand + "\r\n";
+                        string postBuildOutput = Execute(Path.Combine(currentDirectory, postBuildCommand), "", "", currentDirectory, true, true);
+                        textBoxCompileOutputRaw.Text += postBuildOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
+                    }
                 }
+
+                textBoxCompileOutputRaw.Text += "Compile Complete.";
             }
 
-            textBoxCompileOutputRaw.Text += "Compile Complete.";
             objectListViewCompileFormatted.SetObjects(_compilerOutputItems);
 
             int errorCount = _compilerOutputItems.Where(i => i.OutputType == CompileOutputType.Error).Count();
@@ -717,6 +726,10 @@ namespace TASM_IDE
 
         private string Execute(string executable, string targetfile, string arguments, string workingDirectory, bool hide, bool wait)
         {
+            if (!File.Exists(executable))
+            {
+                return "ERROR: " + Path.GetFileName(executable) + " line 0000: program executable not found at '" + executable + "'";
+            }
             ProcessStartInfo si = new ProcessStartInfo();
             // Redirect the output stream of the child process.
             si.UseShellExecute = false;
@@ -756,6 +769,22 @@ namespace TASM_IDE
                     {
                         sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
                         //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                    }
+                    else if (p.ExitCode >= 2)
+                    {
+                        string currentError = sb.ToString().Replace("\r\n", "");
+                        if (p.ExitCode == 2)
+                        {
+                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Insufficient Memory Error:'" + currentError + "'");
+                        }
+                        if (p.ExitCode == 3)
+                        {
+                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: File Not found or not accessible: " + currentError + "'");
+                        }
+                        if (p.ExitCode == 4)
+                        {
+                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with a General error: '" + currentError + "'");
+                        }
                     }
                 }
 
