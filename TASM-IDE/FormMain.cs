@@ -1434,9 +1434,9 @@ namespace TASM_IDE
 
         private void ObjectListViewConfigurations_DoubleClick(object sender, EventArgs e)
         {
-            if (objectListViewFiles.SelectedItem != null)
+            if (objectListViewConfigurations.SelectedItem != null)
             {
-                Configuration configuration = objectListViewFiles.SelectedItem.RowObject as Configuration;
+                Configuration configuration = objectListViewConfigurations.SelectedItem.RowObject as Configuration;
                 if (configuration != null)
                 {
                     Dialogs.ConfigurationEditor ed = new Dialogs.ConfigurationEditor();
