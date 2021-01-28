@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <PublishUrlHistory>.\publish\|C:\SVN\git\tasm-ide\trunk\TASM-IDE\publish\|publi\|https://raw.githubusercontent.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/|https://raw.githubusercontent.com/jessaskey/[repo_name]/[branch]/[solution_name]/[project_name]/publish/</PublishUrlHistory>
-    <InstallUrlHistory>https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/|https://rawgit.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/setup.exe/|https://cdn.rawgit.com/jessaskey/TASM-IDE/aa6d0f55/TASM-IDE/publish/|https://raw.githubusercontent.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/</InstallUrlHistory>
+    <InstallUrlHistory>https://rawcdn.githack.com/jessaskey/TASM-IDE/7b4e6a00fee944e0a9e3c5fc890c459776bc7a3d/TASM-IDE/publish/|https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/|https://rawgit.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/setup.exe/|https://cdn.rawgit.com/jessaskey/TASM-IDE/aa6d0f55/TASM-IDE/publish/|https://raw.githubusercontent.com/jessaskey/TASM-IDE/tree/master/TASM-IDE/publish/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory>https://github.com/jessaskey/TASM-IDE/raw/master/TASM-IDE/publish/</UpdateUrlHistory>
     <BootstrapperUrlHistory />
