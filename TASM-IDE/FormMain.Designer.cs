@@ -96,6 +96,7 @@
             this.objectListViewConfigurations = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripConfigurations = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNewConfiguration = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDeleteConfiguration = new System.Windows.Forms.ToolStripButton();
@@ -410,7 +411,6 @@
             "3",
             "4",
             "5"});
-            this.comboBoxBuildsToRun.SelectedIndex = 0;
             this.comboBoxBuildsToRun.Location = new System.Drawing.Point(88, 132);
             this.comboBoxBuildsToRun.Name = "comboBoxBuildsToRun";
             this.comboBoxBuildsToRun.Size = new System.Drawing.Size(180, 21);
@@ -874,10 +874,12 @@
             // 
             this.objectListViewConfigurations.AllColumns.Add(this.olvColumn3);
             this.objectListViewConfigurations.AllColumns.Add(this.olvColumn4);
+            this.objectListViewConfigurations.AllColumns.Add(this.olvColumn5);
             this.objectListViewConfigurations.CellEditUseWholeCell = false;
             this.objectListViewConfigurations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn3,
-            this.olvColumn4});
+            this.olvColumn4,
+            this.olvColumn5});
             this.objectListViewConfigurations.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListViewConfigurations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectListViewConfigurations.FullRowSelect = true;
@@ -901,7 +903,13 @@
             // 
             this.olvColumn4.AspectName = "RunCommand";
             this.olvColumn4.Text = "RunCommand";
-            this.olvColumn4.Width = 402;
+            this.olvColumn4.Width = 200;
+            // 
+            // olvColumn5
+            // 
+            this.olvColumn5.AspectName = "Arguments";
+            this.olvColumn5.Text = "Arguments";
+            this.olvColumn5.Width = 200;
             // 
             // toolStripConfigurations
             // 
@@ -1594,6 +1602,7 @@
         private System.Windows.Forms.ToolStrip toolStripConfigurations;
         private System.Windows.Forms.ToolStripButton toolStripButtonNewConfiguration;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteConfiguration;
+        private BrightIdeasSoftware.OLVColumn olvColumn5;
     }
 }
 

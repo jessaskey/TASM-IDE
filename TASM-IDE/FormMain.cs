@@ -1101,7 +1101,8 @@ namespace TASM_IDE
                             string runCommand = Path.Combine(currentDirectory, currentConfiguration.RunCommand);
                             if (File.Exists(runCommand))
                             {
-                                string runCommandOutput = Execute(runCommand, "", "", currentDirectory, false, false);
+                                textBoxCompileOutputRaw.Text += "Running Configuration '" + currentConfiguration.Name + "': " + runCommand + " " + currentConfiguration.Arguments;
+                                string runCommandOutput = Execute(runCommand, "", currentConfiguration.Arguments, currentDirectory, false, false);
                                 textBoxCompileOutputRaw.Text += runCommandOutput.Replace("\r\n\r\n", "\r\n") + "\r\n";
                             }
                             else
@@ -1442,12 +1443,15 @@ namespace TASM_IDE
                     Dialogs.ConfigurationEditor ed = new Dialogs.ConfigurationEditor();
                     ed.Name = configuration.Name;
                     ed.RunCommand = configuration.RunCommand;
+                    ed.Arguments = configuration.Arguments;
                     DialogResult dr = ed.ShowDialog();
                     if (dr == System.Windows.Forms.DialogResult.OK)
                     {
                         configuration.Name = ed.Name;
                         configuration.RunCommand = ed.RunCommand;
+                        configuration.Arguments = ed.Arguments;
                         LoadConfigurationsFromProject(_currentProject);
+                        objectListViewConfigurations.RefreshObject(configuration);
                     }
                 }
             }
@@ -1463,6 +1467,7 @@ namespace TASM_IDE
                 configuration.Id = Guid.NewGuid();
                 configuration.Name = ed.Name;
                 configuration.RunCommand = ed.RunCommand;
+                configuration.Arguments = ed.Arguments;
                 _currentProject.Configurations.Add(configuration);
                 LoadConfigurationsFromProject(_currentProject);
                 _currentProject.IsDirty = true;

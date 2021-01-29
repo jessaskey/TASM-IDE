@@ -11,5 +11,6 @@ namespace TASM_IDE.Containers
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string RunCommand { get; set; }
+        public string Arguments { get; set; }
     }
 }

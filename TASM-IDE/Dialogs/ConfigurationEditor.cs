@@ -36,6 +36,18 @@ namespace TASM_IDE.Dialogs
             }
         }
 
+        public string Arguments
+        {
+            get
+            {
+                return textBoxArguments.Text;
+            }
+            set
+            {
+                textBoxArguments.Text = value;
+            }
+        }
+
 
         public ConfigurationEditor()
         {
