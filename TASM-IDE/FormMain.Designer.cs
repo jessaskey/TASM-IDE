@@ -1257,6 +1257,8 @@
             this.toolStripComboBoxBuild.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripComboBoxBuild.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.toolStripComboBoxBuild.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxBuild.Items.AddRange(new object[] {
+            "Debug"});
             this.toolStripComboBoxBuild.Name = "toolStripComboBoxBuild";
             this.toolStripComboBoxBuild.Size = new System.Drawing.Size(92, 27);
             this.toolStripComboBoxBuild.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxBuild_SelectedIndexChanged);

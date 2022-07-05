@@ -28,9 +28,9 @@ namespace TASM_IDE
         public FormMain()
         {
             InitializeComponent();
-            ResetSettingsToDefault();
             olvCompileItemColumnImage.ImageGetter = CompileItemImageGetter;
             LoadRecentFiles();
+            ResetSettingsToDefault();
         }
 
         public object CompileItemImageGetter(object rowObject) {
@@ -292,6 +292,8 @@ namespace TASM_IDE
             checkBoxExpandSource.Checked = false;
             checkBoxIgnoreCase.Checked = false;
             checkBoxContiguousBlockOutput.Checked = true;
+            comboBoxBuildsToRun.SelectedIndex = 0;
+            toolStripComboBoxBuild.SelectedIndex = 0;
         }
 
         private void comboBoxSymNaming_SelectedIndexChanged(object sender, EventArgs e)
@@ -627,7 +629,9 @@ namespace TASM_IDE
                     string listFile = currentDirectory + lb.ToString().TrimStart(new char[] { '.' });
                     if (File.Exists(listFile))
                     {
-                        string[] lines = File.ReadAllLines(listFile);
+                        List<string> lines = new List<string>();
+                        ReadFile(listFile, lines);
+                        //string[] lines = File.ReadAllLines(listFile);
                         bool isTable = false;
                         foreach (string line in lines)
                         {
@@ -724,36 +728,55 @@ namespace TASM_IDE
             
         }
 
+        private void ReadFile(string filename, List<string> outputLines)
+        {
+            using (FileStream logFileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (StreamReader logFileReader = new StreamReader(logFileStream))
+                {
+                    while (!logFileReader.EndOfStream)
+                    {
+                        outputLines.Add(logFileReader.ReadLine());
+                    }
+                }
+            }
+        }
+
         private string Execute(string executable, string targetfile, string arguments, string workingDirectory, bool hide, bool wait)
         {
             if (!File.Exists(executable))
             {
                 return "ERROR: " + Path.GetFileName(executable) + " line 0000: program executable not found at '" + executable + "'";
             }
-            ProcessStartInfo si = new ProcessStartInfo();
-            // Redirect the output stream of the child process.
-            si.UseShellExecute = false;
-            si.RedirectStandardOutput = true;
-            si.RedirectStandardError = true;
-            si.FileName = executable;
-            si.Arguments = arguments;
-            if (!String.IsNullOrEmpty(workingDirectory))
-            {
-                si.WorkingDirectory = workingDirectory;
-            }
-            if (hide)
-            {
-                si.CreateNoWindow = true;
-            }
 
             StringBuilder sb = new StringBuilder();
 
-            using (Process p = Process.Start(si))
+            using (Process p = new Process())
             {
-                if (wait)
+                // Redirect the output stream of the child process.
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.FileName = executable;
+                p.StartInfo.Arguments = arguments;
+                if (!String.IsNullOrEmpty(workingDirectory))
                 {
+                    p.StartInfo.WorkingDirectory = workingDirectory;
+                }
+                if (hide)
+                {
+                    p.StartInfo.CreateNoWindow = true;
+                }
 
-                    p.WaitForExit();
+                if (!wait)
+                {
+                    p.Start();
+                }
+                else
+                {
+                    //must wait for exit then
+                    int timeout = 30 * 1000;
+                    p.Start();
 
                     using (StreamReader reader = p.StandardOutput)
                     {
@@ -765,30 +788,35 @@ namespace TASM_IDE
                         sb.AppendLine(reader.ReadToEnd());
                     }
 
-                    if (p.ExitCode < 0)
+                    if (p.WaitForExit(timeout)) 
                     {
-                        sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
-                        //sb.AppendLine("ERROR: Program terminated unexpectedly with exception code of " + p.ExitCode.ToString());
+                        if (p.ExitCode < 0)
+                        {
+                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with Exception '" + p.ExitCode.ToString() + "'. There may be more details in the output listing.");
+                        }
+                        else if (p.ExitCode >= 2)
+                        {
+                            string currentError = sb.ToString().Replace("\r\n", "");
+                            if (p.ExitCode == 2)
+                            {
+                                sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Insufficient Memory Error:'" + currentError + "'");
+                            }
+                            if (p.ExitCode == 3)
+                            {
+                                sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: File Not found or not accessible: " + currentError + "'");
+                            }
+                            if (p.ExitCode == 4)
+                            {
+                                sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with a General error: '" + currentError + "'");
+                            }
+                        }
                     }
-                    else if (p.ExitCode >= 2)
+                    else
                     {
-                        string currentError = sb.ToString().Replace("\r\n", "");
-                        if (p.ExitCode == 2)
-                        {
-                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Insufficient Memory Error:'" + currentError + "'");
-                        }
-                        if (p.ExitCode == 3)
-                        {
-                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: File Not found or not accessible: " + currentError + "'");
-                        }
-                        if (p.ExitCode == 4)
-                        {
-                            sb.AppendLine("ERROR: " + targetfile + " line 0000: tasm: Program terminated unexpectedly with a General error: '" + currentError + "'");
-                        }
-                    }
+                        // Timed out.
+                        sb.AppendLine("ERROR: " + targetfile + " - Program timed out!");
+                    } 
                 }
-
-
             }
 
             return sb.ToString();
@@ -1419,16 +1447,37 @@ namespace TASM_IDE
             int unusedBytes = 0;
             int checksum = 0;
 
-            byte[] bytes = File.ReadAllBytes(file);
-
-            for (int i = 0; i < bytes.Length; i++)
+            //File.ReadAllBytes(file);
+            using (FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                checksum += bytes[i];
-                if (bytes[i] == emptyValue && i < bytes.Length - 1 && bytes[i + 1] == emptyValue)
+                byte[] bytes = new byte[fileStream.Length];
+                int numBytesToRead = (int)fileStream.Length;
+                int numBytesRead = 0;
+                while (numBytesToRead > 0)
                 {
-                    unusedBytes++;
+                    // Read may return anything from 0 to numBytesToRead.
+                    int n = fileStream.Read(bytes, numBytesRead, numBytesToRead);
+
+                    // Break when the end of the file is reached.
+                    if (n == 0)
+                        break;
+
+                    numBytesRead += n;
+                    numBytesToRead -= n;
+                }
+                numBytesToRead = bytes.Length;
+
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    checksum += bytes[i];
+                    if (bytes[i] == emptyValue && i < bytes.Length - 1 && bytes[i + 1] == emptyValue)
+                    {
+                        unusedBytes++;
+                    }
                 }
             }
+
+
 
             return unusedBytes;
         }
